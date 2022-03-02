@@ -1,5 +1,3 @@
-import sys
-sys.path.append("..")
 from database import search_attracion,search_attractionid
 from flask import *
 
@@ -17,6 +15,7 @@ def get_attraction():
             
         data = search_attracion(keyword=keyword, page=page)
         return jsonify({"nextPage": page+1, "data": data})
+
 
     except:
             return jsonify({"error": True, "message": "伺服器內部錯誤"})
