@@ -23,11 +23,13 @@ mycursor = connection.cursor()
 
 
 def search_attracion(**data):
-    keyword = data['keyword']
-    start = (data['page'])*12  
-    sql = f"SELECT * FROM attractions LIMIT {start}, 12" 
+    start = (int(data['page']))*12
     if data['keyword']:
         sql = f"SELECT * FROM attractions WHERE name LIKE '%{data['keyword']}%' LIMIT {start},12"
+
+    else:
+        sql = f"SELECT * FROM attractions LIMIT {start}, 12" 
+        
 
     mycursor.execute(sql)
     result = mycursor.fetchall()

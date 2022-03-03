@@ -1,3 +1,5 @@
+import sys
+sys.path.append("..")
 from database import search_attracion,search_attractionid
 from flask import *
 
@@ -7,13 +9,12 @@ api = Blueprint('api', __name__)
 @api.route('/attractions', methods=['GET'])
 def get_attraction():
     try: 
-        page = int(request.args['page'])
-        keyword = request.args['keyword']
-        if not keyword or page<0:
-            data = search_attracion(keyword=keyword, page=page)
-            return jsonify({"nextPage": page+1, "data": data})
-            
-        data = search_attracion(keyword=keyword, page=page)
+      
+        page = int(request.args.get('page'))
+        keyword=request.args.get('keyword')
+        if page <0 :
+            return jsonify({"error": True, "message": "page < 0"})
+        data = search_attracion(page=page,keyword=keyword)
         return jsonify({"nextPage": page+1, "data": data})
 
 
