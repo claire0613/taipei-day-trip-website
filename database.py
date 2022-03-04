@@ -1,3 +1,4 @@
+from ast import keyword
 import mysql.connector.pooling
 import json
 
@@ -21,16 +22,28 @@ mycursor = connection.cursor()
 
 # for api/attractions
 
+def attraction_count(**data):
+    if data['keyword']:
+        count=f"SELECT count(name) FROM attractions WHERE name LIKE '%{data['keyword']}%'"
+
+    else:
+        count=f"SELECT count(name) FROM attractions"
+    mycursor.execute(count)
+    allcount=mycursor.fetchall()
+    if  allcount:
+        print(allcount)
+        return  int(allcount[0][0])
+
 
 def search_attracion(**data):
     start = (int(data['page']))*12
     if data['keyword']:
         sql = f"SELECT * FROM attractions WHERE name LIKE '%{data['keyword']}%' LIMIT {start},12"
+        count=f"SELECT count(name) FROM attractions WHERE name LIKE '%{data['keyword']}%' LIMIT {start},12"
 
     else:
         sql = f"SELECT * FROM attractions LIMIT {start}, 12" 
-        
-
+        count=f"SELECT count(name) FROM attractions LIMIT {start}, 12"
     mycursor.execute(sql)
     result = mycursor.fetchall()
     if result:
@@ -42,6 +55,8 @@ def search_attracion(**data):
         return list
     else:
         return None
+
+
 
 def search_attractionid(data):
     id=data
@@ -56,5 +71,3 @@ def search_attractionid(data):
         return item
     else:
         return None
-search_attractionid(2)
-
