@@ -19,12 +19,9 @@ def get_attraction():
             nextpage=None
         else:
             nextpage=page+1
-            if page <0 :
-                    return jsonify({"error": True, "message": "page < 0"})
         return jsonify({"nextPage": nextpage, "data": data}) 
     except:
             return jsonify({"error": True, "message": "伺服器內部錯誤"})
-        
 @api.route('/attraction/<attractionId>', methods=['GET'])
 def get_attractionid(attractionId):
     try:

@@ -1,73 +1,95 @@
-from ast import keyword
+import mysql.connector
 import mysql.connector.pooling
+from mysql.connector import Error
 import json
+import os
+from dotenv import load_dotenv
+load_dotenv()
+try:
+    dbconfig = {
+        'host': os.getenv("SERVER_HOST"),
+        'user': os.getenv("SERVER_USER"),
+        'password': os.getenv("SERVER_PASSWORD"),
+        'database': os.getenv("SERVER_DATABSE"),
+        'charset': 'utf8',
+        
+    }
+
+    connection_pool = mysql.connector.pooling.MySQLConnectionPool(
+        pool_name="pool",
+        pool_size=5,
+        pool_reset_session=True,
+        **dbconfig
+    )
+    connection = connection_pool.get_connection()
+    mycursor = connection.cursor()
 
 
-dbconfig = {
-    'host': 'localhost',
-    'user': 'root',
-    'password': '123456',
-    'charset': 'utf8',
-    'database': 'taipei_trip',
-}
+except Error as e:
+    print("Error while connecting to MySQL using Connection pool ", e)
 
-connection_pool = mysql.connector.pooling.MySQLConnectionPool(
-    pool_name="pool",
-    pool_size=5,
-    pool_reset_session=True,
-    **dbconfig
-)
-connection = connection_pool.get_connection()
-mycursor = connection.cursor()
+finally:
+    if connection.in_transaction:
+        connection.rollback()
+
+
+        
+
+
 
 # for api/attractions
 
 def attraction_count(**data):
     if data['keyword']:
-        count=f"SELECT count(name) FROM attractions WHERE name LIKE '%{data['keyword']}%'"
-
+        sql="SELECT count(name) FROM attractions WHERE name LIKE %s "
+        value=('%'+data['keyword']+'%',)
+        mycursor.execute(sql,value)
+    
     else:
-        count=f"SELECT count(name) FROM attractions"
-    mycursor.execute(count)
+        sql="SELECT count(name) FROM attractions"
+        mycursor.execute(sql)
+        
     allcount=mycursor.fetchall()
+  
     if  allcount:
-        print(allcount)
         return  int(allcount[0][0])
 
 
 def search_attracion(**data):
-    start = (int(data['page']))*12
+    page_12 = int(data["page"])*12
     if data['keyword']:
-        sql = f"SELECT * FROM attractions WHERE name LIKE '%{data['keyword']}%' LIMIT {start},12"
-        count=f"SELECT count(name) FROM attractions WHERE name LIKE '%{data['keyword']}%' LIMIT {start},12"
-
+        sql = "SELECT * FROM attractions WHERE name LIKE %s LIMIT %s, %s"
+        value=('%'+data['keyword']+'%',page_12,12)
     else:
-        sql = f"SELECT * FROM attractions LIMIT {start}, 12" 
-        count=f"SELECT count(name) FROM attractions LIMIT {start}, 12"
-    mycursor.execute(sql)
+        sql = "SELECT * FROM attractions LIMIT %s , %s" 
+        value=(page_12,12)
+    mycursor.execute(sql,value)
     result = mycursor.fetchall()
     if result:
-        list = []
+        lst = []
         for i in result:
             item = dict(zip(mycursor.column_names, i))
             item ["images"] = json.loads(item["images"])
-            list.append(item)
-        return list
+            lst.append(item)
+        return lst
     else:
         return None
+
 
 
 
 def search_attractionid(data):
-    id=data
-    sql=f"SELECT * FROM attractions WHERE id = {id}"
-    mycursor.execute(sql)
+  
+    sql="SELECT * FROM attractions WHERE id = %s"
+    value=(data,)
+    mycursor.execute(sql,value)
     result = mycursor.fetchall()
     for i in result:
         item = dict(zip(mycursor.column_names, i))
         item ["images"] = json.loads(item["images"])
-  
-       
+
         return item
     else:
         return None
+    
+    
