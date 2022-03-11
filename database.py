@@ -69,7 +69,6 @@ def search_attracion(**data):
         for i in result:
             item=resultformat(i)
             lst.append(item)
-        print(lst[0]["images"])
         return lst
     else:
         return None
@@ -88,8 +87,6 @@ def resultformat(result):
         "images":json.loads(result[9])
     }
     return result
-
-search_attracion(page=0,keyword=None)
 
 
 def search_attractionid(data):
