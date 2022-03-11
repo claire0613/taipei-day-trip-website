@@ -77,9 +77,9 @@ const options = {
 let callback = ([entry]) => {
         if (entry.isIntersecting) {
             if(!isnextpage){
-                setTimeout(loading,50);
+                setTimeout(loading,500);
             }
-        
+
   
         }
           
