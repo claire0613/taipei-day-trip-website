@@ -1,7 +1,8 @@
 import json
 import mysql.connector
 import mysql.connector.pooling
-
+from dotenv import load_dotenv
+load_dotenv()
 dbconfig = {
     'host': 'localhost',
     'user': 'root',

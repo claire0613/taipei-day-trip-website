@@ -1,0 +1,57 @@
+body{
+    height: 100%;
+    width: 100%;
+    margin: 0px;
+    font-family:"NotoSansTC-Regular";
+} 
+@font-face {
+    font-family:"NotoSansTC-Regular";
+    src:url("NotoSansTC-Regular.otf");
+}
+
+
+nav{
+    display: flex;
+    margin: 0px auto;
+    background-color: rgb(255, 255, 255);
+    position: sticky;
+    top:0px;
+   
+   
+}
+.navframe{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1200px;
+    height: 34px;
+    margin: 10px auto;
+    
+
+
+}
+.topic{
+    flex: none;
+    font-size: 30px;
+    width: 170px;
+    text-align: left;
+    color: #448899;
+    font-weight: bolder;
+    line-height: 34px;
+
+}
+.menu{
+    flex:auto ;
+    text-align: end;
+    margin: 5px;
+}
+.menu>a{
+    text-decoration: none;
+    margin: 10px;
+    color: #666666;
+    cursor: pointer;
+
+    font-size: 16px;
+    line-height: 14px;
+    
+}
