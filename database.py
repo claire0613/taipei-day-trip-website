@@ -1,4 +1,3 @@
-import mysql.connector
 import mysql.connector.pooling
 from mysql.connector import Error
 import json
