@@ -1,7 +1,12 @@
 body{
     height: 100%;
     width: 100%;
-    font-family: "Noto Sans TC", sans-serif;
+    margin: 0px;
+    font-family:"NotoSansTC-Regular";
+} 
+@font-face {
+    font-family:"NotoSansTC-Regular";
+    src:url("NotoSansTC-Regular.otf");
 }
 
 
@@ -9,6 +14,8 @@ nav{
     display: flex;
     margin: 0px auto;
     background-color: rgb(255, 255, 255);
+    position: sticky;
+    top:0px;
    
    
 }
@@ -26,17 +33,17 @@ nav{
 .topic{
     flex: none;
     font-size: 30px;
-    width: 200px;
+    width: 170px;
     text-align: left;
     color: #448899;
-    font-weight: 700;
-    font-style: normal;
+    font-weight: bolder;
     line-height: 34px;
 
 }
 .menu{
     flex:auto ;
     text-align: end;
+    margin: 5px;
 }
 .menu>a{
     text-decoration: none;

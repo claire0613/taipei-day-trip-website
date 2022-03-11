@@ -1,21 +1,24 @@
 
 .desktop{
-    position: relative;
-    z-index: 0;
     width: 100%;
     height: 320px;
     background: linear-gradient(135deg, #AADDEE 0%, #66AABB 100%);
-    display: flex;
-    align-items: center;
+
+
+    
 }
 
 .desktop>div{
-    position: relative;
-    z-index: 1; 
+    background-image: url("welcome\ 1.png");
+    background-repeat: no-repeat;
+    background-position: top right ;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 320px;
     width: 1200px;
     margin: 0px auto;
-    padding: 10px;
-    height: 169px;
+
 }
 .desktop form{
     display: flex;
@@ -35,7 +38,7 @@
    
     
 }
-.search{
+.btn{
     background-color: #448899;
     width: 60px;
     height: 46px;
@@ -49,7 +52,7 @@
 .desktop h3{
     font-size: 28px;
     color: #F8F8F8;
-    margin-bottom: 15px;
+    margin: 0 0 15px 0;
     font-style: normal;
     font-weight: 700;
     line-height: 24px;
@@ -58,38 +61,88 @@
 .desktop p{
     color: #F8F8F8;
 }
-.desktop-img{
-    position: absolute;
-    width: 650px;
-    height: 320px;
-    left: calc(55%);
-    bottom: 0;
-    overflow: hidden;
-}
-
-
 
 .content {
-    display: flex;
+    display: grid;
     justify-content: center;
+    justify-items: center;
     align-items: center;
-    flex-wrap: wrap;
+    gap:10px;
     width: 1200px;
     margin: auto;
+    grid-template-columns: repeat(4, minmax(270px, 1fr));
 }
 
-.site {
-
-    width: 280;
+.content>.box {
+ 
+    width: 271px;
+    height: 242 px;
     margin: 10px;
-    background-color: rgb(135, 185, 226);
+    border-radius: 5px;
+    border: 1px solid #E8E8E8;
+    box-sizing: border-box;
 
 }
 
-.site img {
-    width: 280px;
-    height: 210px;
-    margin: 0px;
-    aspect-ratio: 16/9;
+.content>.box> img {
+    width: 270px;
+    height: 202px;
+    border-radius: 5px 5px 0 0;
+}
+.content>.box> .name{
+    color: #757575;
+    font-weight: 700;
+    font-size: 16px;
+    margin: 5px;
 }
 
+.content>.box> .detail{
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+    color: #757575;
+    font-weight: 400;
+}
+
+
+@media (max-width:1200px){
+    .desktop>div{
+        width: 100%;
+        align-items: center;
+    }
+    .desktop input{
+        width: 300px;
+    } 
+
+    .content{
+        width: 90%;
+        grid-template-columns: repeat(2, minmax(45%, 1fr));
+        
+    }
+    .content>.box{
+        width: 100%;
+      
+    
+    }
+    .content>.box> img {
+        width: 100%;
+        height: 100%;
+        aspect-ratio: 16/9;
+
+      
+    }
+}
+
+@media (max-width:600px){
+    .content{
+        grid-template-columns: repeat(1, minmax(90%, 1fr));
+}
+    .desktop>div{
+        background-size: 80%;
+        background-position:  bottom ;
+    }
+    .desktop input{
+        width: 200px;
+    } 
+
+}
