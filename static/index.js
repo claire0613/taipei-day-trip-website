@@ -2,9 +2,11 @@ const form = document.querySelector('form')
 let content = document.querySelector('.content')
 let page=0;
 let keyword='';
-let isnextpage=false;
-console.log(form)
+// let isnextpage=false;
+let isfetching=false;
+
 async function loading(){
+    isfetching=true;
     
     if (page == null){
         return 
@@ -52,19 +54,20 @@ async function loading(){
         content.append(nodata)
         
     }
+    isfetching=false;
   
     }
  
 
  function keywordSearch(event){
     event.preventDefault();
-    isnextpage=true;
+    // isnextpage=true;
     let text=document.querySelector('input').value;
     keyword = text;
     page = 0;
     content.textContent = ''
     loading()
-    isnextpage=false;
+    // isnextpage=false;
 
 }
 
@@ -76,8 +79,9 @@ const options = {
   }
 let callback = ([entry]) => {
         if (entry.isIntersecting) {
-            if(!isnextpage){
-                setTimeout(loading,1000);
+            if(!isfetching){
+                // setTimeout(loading,1000);
+                loading();
             }
 
   
