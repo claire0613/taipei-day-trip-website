@@ -82,6 +82,8 @@ opacity: 1;
 .bookingform{
     background-color: #E8E8E8;
     height: 302px;
+    border-radius: 5px 5px 5px 5px;
+   
 }
 .bookingform>.bookingdetal>.block{
     margin: 15px 20px 15px 20px;
