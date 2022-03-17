@@ -2,7 +2,6 @@ const form = document.querySelector('form')
 let content = document.querySelector('.content')
 let page=0;
 let keyword='';
-// let isnextpage=false;
 let isfetching=false;
 
 async function loading(){
@@ -39,7 +38,7 @@ async function loading(){
             name.href=`/attraction/${site.id}`
             name.className = 'name'
             name.textContent =site.name
-            
+
             let detail=document.createElement('div');
             detail.className = 'detail'
             let mrt=document.createElement('div');
@@ -70,13 +69,11 @@ async function loading(){
 
  function keywordSearch(event){
     event.preventDefault();
-    // isnextpage=true;
     let text=document.querySelector('input').value;
     keyword = text;
     page = 0;
     content.textContent = ''
     loading()
-    // isnextpage=false;
 
 }
 
@@ -89,15 +86,10 @@ const options = {
 let callback = ([entry]) => {
         if (entry.isIntersecting) {
             if(!isfetching){
-                // setTimeout(loading,1000);
                 loading();
             }
-
   
         }
-          
-    
-      
     
   }
 
@@ -110,6 +102,8 @@ let observer = new IntersectionObserver(callback, options)
 // // 設定觀察// 觀察目標元素
 observer.observe(footer)
 form.addEventListener('submit',keywordSearch)
+
+
 
 
 
