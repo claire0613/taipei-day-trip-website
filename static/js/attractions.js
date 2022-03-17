@@ -114,18 +114,18 @@ async function attractions(){
         let autorun= function(){
                 timer=setInterval(() => {rightbtn.click();
             
-                }, 3000);
+                }, 2500);
             }
            
 
 
             imgbox.addEventListener("mouseenter",function(){
                 clearInterval(timer);
-                console.log('clear')
+              
             })
             imgbox.addEventListener("mouseleave",function(){
                 autorun();
-                console.log('run')
+            
             })
             autorun();
        
