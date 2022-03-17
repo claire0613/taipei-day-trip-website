@@ -114,7 +114,7 @@ async function attractions(){
         let autorun= function(){
                 timer=setInterval(() => {rightbtn.click();
             
-                }, 2500);
+                },3000);
             }
            
 
