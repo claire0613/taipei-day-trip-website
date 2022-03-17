@@ -107,9 +107,7 @@ opacity: 1;
     width: 185px;
     height: 25px;
     border: none;
-    background-image: url(/static/icons/icon_calendar.png);
-    background-repeat: no-repeat;
-    background-position:  right ;
+    background-color: #FFFFFF;
 
 }
 
