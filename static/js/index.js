@@ -23,27 +23,36 @@ async function loading(){
     let content = document.querySelector('.content')
     if (data["data"]){
         let attractions=data.data
-        let fragment = document.createDocumentFragment();
+        // let fragment = document.createDocumentFragment();
         
         for (let site of attractions){
             let box = document.createElement('div');
             box.className = 'box'
-            const img = document.createElement('img');
+
+            let imglink= document.createElement('a')
+            imglink.href = `/attraction/${site.id}`
+            let img = document.createElement('img');
             img.src = site.images[0]
-            let name = document.createElement('div');
+
+
+            let name = document.createElement('a');
+            name.href=`/attraction/${site.id}`
             name.className = 'name'
             name.textContent =site.name
+            
             let detail=document.createElement('div');
             detail.className = 'detail'
             let mrt=document.createElement('div');
             mrt.textContent =site.mrt
             let category=document.createElement('div');
             category.textContent =site.category
+
             detail.append(mrt,category)
-            box.append(img,name,detail)
-            fragment.appendChild(box)  
+            imglink.append(img)
+            box.append(imglink,name,detail)
+            content.appendChild(box)  
         }
-        content.append(fragment)
+        // content.append(fragment)
     }
     page=data["nextPage"]
     isnextpage=false;

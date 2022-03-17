@@ -9,7 +9,7 @@
 }
 
 .desktop>div{
-    background-image: url("welcome\ 1.png");
+    background-image: url("/static/icons/welcome\ 1.png");
     background-repeat: no-repeat;
     background-position: top right ;
     display: flex;
@@ -39,6 +39,7 @@
     
 }
 .btn{
+ 
     background-color: #448899;
     width: 60px;
     height: 46px;
@@ -46,6 +47,11 @@
     border:none;
     border-radius: 0 5px 5px 0;
     font-size: large;
+
+
+}
+.btn >img{
+    margin: 8px 15px 8px 12px;
 
 }
 
@@ -84,16 +90,19 @@
 
 }
 
-.content>.box> img {
+.content>.box> a>img {
     width: 270px;
     height: 202px;
     border-radius: 5px 5px 0 0;
 }
-.content>.box> .name{
+.content>.box>.name{
     color: #757575;
     font-weight: 700;
     font-size: 16px;
-    margin: 5px;
+    margin: 10px;
+    text-decoration: none;
+    cursor: pointer;
+
 }
 
 .content>.box> .detail{
@@ -124,7 +133,7 @@
       
     
     }
-    .content>.box> img {
+    .content>.box> a>img {
         width: 100%;
         height: 100%;
         aspect-ratio: 16/9;
