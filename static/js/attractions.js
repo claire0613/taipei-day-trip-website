@@ -117,15 +117,13 @@ async function attractions(){
                 }, 2500);
             }
            
-
-
             imgbox.addEventListener("mouseenter",function(){
                 clearInterval(timer);
-                console.log('clear')
+                
             })
             imgbox.addEventListener("mouseleave",function(){
                 autorun();
-                console.log('run')
+                
             })
             autorun();
        
