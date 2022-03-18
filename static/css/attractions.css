@@ -123,16 +123,6 @@ opacity: 1;
     accent-color: #448899;
 }
 
-
-
-
-
-
-
-
-
-
-
 #booking_title>span{
     font-weight:400;
 }
@@ -205,14 +195,16 @@ z-index: 1;
 
     }
     .bookingInfo> .imgBox{
-        width:  75%;
+        max-width: 100%;
         height: 350px;
+        
+    
         margin: 20px;
     }
 
     .bookingInfo> .imgBox>img{
         width: 100%;
-      
+        
     
     }
     .bookingInfo>.profile{
@@ -231,10 +223,20 @@ z-index: 1;
 
 @media(max-width:600px){
     .bookingInfo> .imgBox{
-        width:  100%;
-        height: 350px;
+        max-width: 100%;
+        height: auto;
+        aspect-ratio: 1.5/1;
     
     }
+
+  /* .bookingInfo> .imgBox>img{
+        width: 100%;
+        
+    
+    } */
+
+
+
     .bookingform{
         height:auto;
     }
