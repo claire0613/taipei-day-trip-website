@@ -135,11 +135,12 @@ opacity: 1;
     border-radius: 5px;
     border:none;
     text-align: center;
-    margin: 25px 20px 25px 20px;
+    margin: 15px 20px;
 
 }
 .imgBox #ol{
 z-index: 1;
+margin-bottom: 13px;
 }
 .imgBox> #ol> li{
 	border-radius: 45px;			/*令其呈圓形*/
@@ -169,7 +170,7 @@ z-index: 1;
 .bookingdetal>p{
     color:#666666;
     padding: 15px 20px;
-    margin: 0px auto ;
+    margin: 20px auto ;
 }
 
 .detail{
@@ -179,8 +180,8 @@ z-index: 1;
     color: #666666;
 
 }
-.datail>p{
-    padding: 15px 0px;
+.description>p{
+    padding: 50px 0px 20px 0px;
 }
 
 
@@ -210,6 +211,9 @@ z-index: 1;
 
     .detail{
         width: 90%;
+    }
+    .bookingform{
+        height: auto;
     }
 
 }
