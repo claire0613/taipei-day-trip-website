@@ -20,6 +20,9 @@
     margin: 0px auto;
 
 }
+.desktop>div>div{
+    margin-bottom: 25px;
+}
 .desktop form{
     display: flex;
 }
