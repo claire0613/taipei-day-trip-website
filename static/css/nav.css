@@ -1,3 +1,11 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    /* box-sizing:寬高設定作用在邊框外緣的範圍內 */
+}
+
+
 body{
     height: 100%;
     width: 100%;

@@ -1,7 +1,9 @@
+
 import mysql.connector.pooling
 import os
 from dotenv import load_dotenv
 load_dotenv()
+
 
 dbconfig = {
     'host': os.getenv("SERVER_HOST"),
@@ -30,3 +32,5 @@ images JSON NOT NULL,
 PRIMARY KEY (id))ENGINE=InnoDB; 
     """)  # InnoDB 儲存引擎 具備Commit, Rollback和當掉復原的事務處理能力，可保護使用者資料
 connection.commit()
+
+
