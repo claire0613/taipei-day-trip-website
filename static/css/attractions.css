@@ -1,0 +1,243 @@
+
+/* 互動輪播 + 行程訂購頁面 */
+.bookingInfo{
+    display: grid;
+    width: 1200px;
+    margin: auto;
+    align-items: center;
+    justify-content: center;
+    grid-template-columns: repeat(2, minmax(500px, 1fr));
+
+}
+.bookingInfo> .imgBox{
+    width: 540px;
+    height: 406px;
+    margin: auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+
+}
+.bookingInfo> .imgBox>img{
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    position:absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+
+}
+.bookingInfo> .imgBox>img.show{
+opacity: 1;
+}
+
+
+
+.bookingInfo> .imgBox>#leftbtn{
+    position: absolute;
+    top:50%;
+    left:10px;
+    z-index: 1;
+    
+}
+.bookingInfo> .imgBox>#rightbtn{
+    position: absolute;
+    top:50%;
+    right:10px;
+    z-index: 1;
+}
+.bookingInfo>.profile{
+    margin: 15px 0px;
+    color: #666666;
+    font-size: 16px;
+    line-height: 13.3px;
+    width: 600px;
+    height:406px ;
+
+}
+.profile>.name{
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0px 0px 15px 0px ;
+}
+.profile>.block{
+    padding: 15px 0px;
+}
+.bookingdetal>#booking_title{
+
+   margin: 15px 20px;
+}
+#booking_title{
+    font-weight: bold;
+    color: #666666;
+    padding: 0px 5px 0px 0px;
+ }
+
+.bookingform{
+    background-color: #E8E8E8;
+    height: 302px;
+    border-radius: 5px 5px 5px 5px;
+   
+}
+.bookingform>.bookingdetal>.block{
+    margin: 15px 20px 15px 20px;
+}
+
+.date{
+    margin: 15px 20px 15px 20px;
+    display: flex;
+    align-items: center;
+    
+}
+.date>div{
+    display: flex;
+    align-items: center;
+    width: 193px;
+    height: 35px;
+    background-color: #FFFFFF;
+ 
+}
+.date>div>#date{
+    width: 185px;
+    height: 25px;
+    border: none;
+    background-color: #FFFFFF;
+
+}
+
+#time{
+    
+    width: 22px;
+    height: 22px;
+    background:#ffffff;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+}
+#time:checked{
+    accent-color: #448899;
+}
+
+#booking_title>span{
+    font-weight:400;
+}
+
+
+.bookingform>.btn>button{
+    width: 154px;
+    height: 36px;
+    background-color: #448899;
+    color: #FFFFFF;
+    font-size: 19px;
+    line-height: 16px;
+    border-radius: 5px;
+    border:none;
+    text-align: center;
+    margin: 15px 20px;
+
+}
+.imgBox #ol{
+z-index: 1;
+margin-bottom: 13px;
+}
+.imgBox> #ol> li{
+	border-radius: 45px;			/*令其呈圓形*/
+	width: 12px;
+	height: 12px;
+	background-color: #FFFFFF;
+	cursor: pointer;			/*滑鼠呈 手 樣式*/
+	line-height: 20px;
+	text-align: center;
+	opacity: 0.5;				/*設定透明度*/
+	/* border: 2px solid #333; */
+	float: left;
+	margin: 3px 12px;
+    list-style-type: none;
+    
+}
+
+.imgBox #ol li:hover{
+	opacity: 0.8;
+}
+.imgBox> #ol >.now{
+   
+   	/*當前展示圖片所對應的數字按鈕(這個.now我們由js動態設定)*/
+	opacity: 1;					/*不透明*/
+	background-color: #333;
+}
+.bookingdetal>p{
+    color:#666666;
+    padding: 15px 20px;
+    margin: 20px auto ;
+}
+
+.detail{
+    margin: 37px auto;
+    width: 1200px;
+    border-top:1px solid #E8E8E8;
+    color: #666666;
+
+}
+.description>p{
+    padding: 50px 0px 20px 0px;
+}
+.address,.transport{
+    padding: 20px 0px
+}
+
+
+@media(max-width:1200px){
+    .bookingInfo{
+        width: 100%;
+        grid-template-columns: repeat(1, minmax(90%, 1fr));
+        justify-items: center;
+
+    }
+    .bookingInfo> .imgBox{
+        max-width: 100%;
+        aspect-ratio: 1.5/1;
+    
+        margin: 20px;
+    }
+
+    .bookingInfo> .imgBox>img{
+        width: 100%;
+    
+    }
+    .bookingInfo>.profile{
+        margin: 10px;
+        width:95%;
+       
+    }
+
+    .detail{
+        width: 90%;
+    }
+    .bookingform{
+        height: auto;
+    }
+
+}
+
+
+@media(max-width:600px){
+    .bookingInfo> .imgBox{
+        height: auto;
+        
+    }
+    .bookingform{
+        height:auto;
+    }
+    .bookingInfo > .profile{
+        line-height: 20px;
+        height: auto;
+      
+    }
+    
+    .detail{
+        width: 90%;
+    }
+
+}

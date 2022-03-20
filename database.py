@@ -77,7 +77,7 @@ def resultformat(result):
         "id":result[0],
         "name":result[1],
         "category":result[2],
-        "descripition":result[3],
+        "description":result[3],
         "address":result[4],
         "transport":result[5],
         "mrt":result[6],

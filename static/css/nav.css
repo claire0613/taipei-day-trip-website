@@ -1,3 +1,11 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    /* box-sizing:寬高設定作用在邊框外緣的範圍內 */
+}
+
+
 body{
     height: 100%;
     width: 100%;
@@ -16,6 +24,7 @@ nav{
     background-color: rgb(255, 255, 255);
     position: sticky;
     top:0px;
+    z-index: 2;
    
    
 }
@@ -26,31 +35,35 @@ nav{
     width: 1200px;
     height: 34px;
     margin: 10px auto;
-    
 
 
 }
 .topic{
     flex: none;
+    width: 150px;
+    height: 34px;
+    margin: 10px;
+}
+.topic>a{
+    text-decoration: none;
     font-size: 30px;
-    width: 170px;
-    text-align: left;
     color: #448899;
-    font-weight: bolder;
+    cursor: pointer;
+    width: 150px;
     line-height: 34px;
-
+    font-weight: bolder;
+    
 }
 .menu{
     flex:auto ;
     text-align: end;
-    margin: 5px;
+   
 }
 .menu>a{
     text-decoration: none;
     margin: 10px;
     color: #666666;
     cursor: pointer;
-
     font-size: 16px;
     line-height: 14px;
     

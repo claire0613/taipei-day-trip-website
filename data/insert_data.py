@@ -29,7 +29,11 @@ for spot in attraction_list:
     images_cut = spot["file"].split('https')
     images = []
     for i in range(1, len(images_cut)):
-        images.append('https'+images_cut[i])
+        if images_cut[i].find('.jpg')!= -1 or images_cut[i].find('.JPG')!= -1 or images_cut[i].find('.png')!= -1 \
+            or images_cut[i].find('.PNG')!= -1 :
+            images.append('https'+images_cut[i])
+        
+            
     sql = ("INSERT INTO attractions"
            "(name,category,description,address,transport,mrt,latitude,longitude,images)"
            "VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s)")

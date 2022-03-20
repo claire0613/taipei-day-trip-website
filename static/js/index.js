@@ -2,9 +2,10 @@ const form = document.querySelector('form')
 let content = document.querySelector('.content')
 let page=0;
 let keyword='';
-let isnextpage=false;
-console.log(form)
+let isfetching=false;
+
 async function loading(){
+    isfetching=true;
     
     if (page == null){
         return 
@@ -21,27 +22,36 @@ async function loading(){
     let content = document.querySelector('.content')
     if (data["data"]){
         let attractions=data.data
-        let fragment = document.createDocumentFragment();
+        // let fragment = document.createDocumentFragment();
         
         for (let site of attractions){
             let box = document.createElement('div');
             box.className = 'box'
-            const img = document.createElement('img');
+
+            let imglink= document.createElement('a')
+            imglink.href = `/attraction/${site.id}`
+            let img = document.createElement('img');
             img.src = site.images[0]
-            let name = document.createElement('div');
+
+
+            let name = document.createElement('a');
+            name.href=`/attraction/${site.id}`
             name.className = 'name'
             name.textContent =site.name
+
             let detail=document.createElement('div');
             detail.className = 'detail'
             let mrt=document.createElement('div');
             mrt.textContent =site.mrt
             let category=document.createElement('div');
             category.textContent =site.category
+
             detail.append(mrt,category)
-            box.append(img,name,detail)
-            fragment.appendChild(box)  
+            imglink.append(img)
+            box.append(imglink,name,detail)
+            content.appendChild(box)  
         }
-        content.append(fragment)
+        // content.append(fragment)
     }
     page=data["nextPage"]
     isnextpage=false;
@@ -52,19 +62,18 @@ async function loading(){
         content.append(nodata)
         
     }
+    isfetching=false;
   
     }
  
 
  function keywordSearch(event){
     event.preventDefault();
-    isnextpage=true;
     let text=document.querySelector('input').value;
     keyword = text;
     page = 0;
     content.textContent = ''
     loading()
-    isnextpage=false;
 
 }
 
@@ -76,15 +85,11 @@ const options = {
   }
 let callback = ([entry]) => {
         if (entry.isIntersecting) {
-            if(!isnextpage){
-                setTimeout(loading,1000);
+            if(!isfetching){
+                loading();
             }
-
   
         }
-          
-    
-      
     
   }
 
@@ -97,6 +102,8 @@ let observer = new IntersectionObserver(callback, options)
 // // 設定觀察// 觀察目標元素
 observer.observe(footer)
 form.addEventListener('submit',keywordSearch)
+
+
 
 
 
