@@ -14,20 +14,19 @@ api_user = Blueprint('api_user', __name__)
 
 @api_user.route('/user',methods=['GET'])
 def get_user():
-    try:     # 有登入
+    try:
+        # 有登入
         token_cookie=request.cookies.get('user_cookie')
-        user=jwt.decode(token_cookie,os.getenv("SECRET_KEY"),algorithms=['HS256'])
         if token_cookie :
+            user=jwt.decode(token_cookie,os.getenv("SECRET_KEY"),algorithms=['HS256'])
             data = {"data":user}
             return jsonify(data)
-
-        # 沒登入or token 超時
+        #  token 超時 or 未登入
         else:
             data = {"data": None}
             return jsonify(data)
 
     except:
-        print('fail')
         return jsonify({"error": True, "message": "伺服器內部錯誤"})
 
 @api_user.route('/user',methods=['POST'])
