@@ -38,16 +38,18 @@ opacity: 1;
 
 .bookingInfo> .imgBox>#leftbtn{
     position: absolute;
-    top:50%;
+    top:45%;
     left:10px;
     z-index: 1;
+    opacity: 0.5;
     
 }
 .bookingInfo> .imgBox>#rightbtn{
     position: absolute;
-    top:50%;
+    top:45%;
     right:10px;
     z-index: 1;
+    opacity: 0.5;
 }
 .bookingInfo>.profile{
     margin: 15px 0px;
@@ -208,7 +210,7 @@ margin-bottom: 13px;
     }
     .bookingInfo>.profile{
         margin: 10px;
-        width:95%;
+        width:90%;
        
     }
 

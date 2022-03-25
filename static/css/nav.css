@@ -1,10 +1,14 @@
-*{
-    margin: 0px;
-    padding: 0px;
+
+html {
     box-sizing: border-box;
-    /* box-sizing:寬高設定作用在邊框外緣的範圍內 */
+   
 }
 
+*, *::before, *::after {
+    box-sizing: inherit;
+    padding: 0;
+    margin: 0;
+}
 
 body{
     height: 100%;
@@ -25,6 +29,7 @@ nav{
     position: sticky;
     top:0px;
     z-index: 2;
+    border-bottom:1px solid #e8e8e8;
    
    
 }
@@ -40,7 +45,7 @@ nav{
 }
 .topic{
     flex: none;
-    width: 150px;
+    width: 160px;
     height: 34px;
     margin: 10px;
 }
@@ -54,17 +59,157 @@ nav{
     font-weight: bolder;
     
 }
-.menu{
+.nav-link{
     flex:auto ;
     text-align: end;
-   
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    
 }
-.menu>a{
+.nav-link>a{
     text-decoration: none;
     margin: 10px;
     color: #666666;
     cursor: pointer;
     font-size: 16px;
     line-height: 14px;
+}
+.nav-link>:is(#signin-up-btn,#signout-btn).show{
+    display:block;
+}
+
+
+.nav-link>#signin-up-btn{
+    display: none;
+    margin: 10px;
+    color: #666666;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 14px;
     
+    
+}
+/* #signin-up-btn{
+    color: #666666;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 14px;
+} */
+#signout-btn{
+    display: none;
+    color: #666666;
+    cursor: pointer;
+    margin: 10px;
+    font-size: 16px;
+    line-height: 14px;
+
+}
+
+
+
+
+
+
+.signpage{
+    display:none;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.25);
+    z-index: 3;
+    position: fixed;
+    top:0px;
+  
+}
+.showup{
+    display: block;
+}
+.signpage>.sign-container{
+    display: none;
+    width: 340px;
+    
+    margin: auto;
+    box-shadow: 0px 4px 60px #AAAAAA;
+    border-radius: 6px;
+    margin: 80px auto;
+    background-color: white;
+
+}
+.sign-container.show{
+    display: block;
+}
+
+
+
+
+.sign-container>.topbar{
+    background: linear-gradient(135deg, #AADDEE 0%, #66AABB 100%);
+    height: 10px;
+    border-radius: 6px 6px 0 0 ;
+}
+.form-title{
+    width: 310px;
+    height: 27px;
+    position: relative;
+    color: #666666;
+    margin: 15px 0px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 24px;
+
+}
+.form-title .close-btn{
+    position: absolute;
+    cursor: pointer;
+    font-weight: normal;
+    line-height: 16px;
+    width: 16px;
+    top: 2px;
+    right: 2px;
+ 
+}
+
+.form-content{
+    width: 310px;
+    margin:auto 15px;
+}
+.input-content>*{
+    width: 100%;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.input-content>input{
+    border: 1px solid #cccccc;
+    padding: 15px;
+    color: #666666;
+    font-size: 16px;
+    line-height: 13.3px;
+
+    
+}
+
+.input-content>button{
+    color: #ffffff;
+    font-size: 19px;
+    line-height: 16px;
+    background: #448899;
+    border: 0;
+    padding: 10px;
+    height: 47px;
+    cursor: pointer;
+}
+.form-content .message{
+    text-align:center ;
+    color: red;
+    margin-bottom: 5px;
+}
+
+.form-content .convert-sign{
+    color: #666666;
+    cursor: pointer;
+    width: fit-content;
+    margin: 0 auto;
+    padding-bottom: 15px;
+  
 }

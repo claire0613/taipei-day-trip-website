@@ -1,16 +1,22 @@
 from api.attraction import api
-from datetime import timedelta
-from flask import *	
-
+from api.user import api_user
+from flask import *
+import jwt
+import os
+from dotenv import load_dotenv
+load_dotenv()
 app = Flask(__name__)
+# register blueprint
+app.register_blueprint(api, url_prefix='/api')
+app.register_blueprint(api_user, url_prefix='/api')
+
 app.config["JSON_AS_ASCII"] = False
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 app.config["JSON_SORT_KEYS"]=False
+app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
 
 
 
-# register blueprint
-app.register_blueprint(api, url_prefix='/api')
 
 
 

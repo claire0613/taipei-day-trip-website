@@ -31,6 +31,20 @@ mrt VARCHAR(255), latitude DOUBLE NOT NULL, longitude DOUBLE NOT NULL,
 images JSON NOT NULL,
 PRIMARY KEY (id))ENGINE=InnoDB; 
     """)  # InnoDB 儲存引擎 具備Commit, Rollback和當掉復原的事務處理能力，可保護使用者資料
+
+mycursor.execute("""
+   CREATE TABLE IF NOT EXISTS users(
+      id BIGINT  AUTO_INCREMENT,
+      name VARCHAR(255) NOT NULL, 
+      email VARCHAR(255) NOT NULL UNIQUE, 
+      password VARCHAR(255) NOT NULL, 
+      PRIMARY KEY (id)) charset=utf8;
+   """
+)
+
+
 connection.commit()
+
+
 
 

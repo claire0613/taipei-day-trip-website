@@ -16,19 +16,62 @@
     <nav>
         <div class="navframe">
             <div class="topic"><a href="/">台北一日遊</a></div>
-            <div class="menu">
+            <div class="nav-link">
                 <a href="/templates/index.html">預定行程</a>
-                <a href="/templates/index.html">登入/註冊</a>
+                <div id="signin-up-btn" class="show">登入/註冊</div>
+                <div id="signout-btn">登出系統</div>
             </div>
         </div>
     </nav>
+
+    <section class="signpage">
+        <div class="sign-container show">
+            <div class="topbar"></div>
+            <div class="form-content">
+                <form id="signin">
+                    <h3 class="form-title">登入會員帳號
+                        <div class="close-btn">✕</div>
+                    </h3>
+                    <div class="input-content">
+                        <input type="email" placeholder="輸入電子信箱" name="email" required>
+                        <input type="password" placeholder="輸入密碼" name="password" required>
+                        <button type="submit">登入帳戶</button>
+                    </div>
+                    <p class="message"></p>
+                    <p class="convert-sign">還沒有帳戶？點此註冊</p>
+                </form>
+            </div>
+        </div>
+     
+        <div class="sign-container">
+            <div class="topbar"></div>
+            <div class="form-content">
+                <form id="signup">
+                    <h3 class="form-title">註冊會員帳號
+                        <div class="close-btn">✕</div>
+                    </h3>
+                    <div class="input-content">
+                        <input type="text" placeholder="輸入姓名" name="name" required>
+                        <input type="email" placeholder="輸入電子信箱" name="email" required>
+                        <input type="password" placeholder="輸入密碼" name="password" required>
+                        <button type="submit">註冊帳戶</button>
+                    </div>
+                    <p class="message"></p>
+                    <p class="convert-sign">已經有帳戶了？點此登入</p>
+                </form>
+            </div>
+        </div> 
+    </section>
+
+
+
     <section class="desktop">
         <div>
             <div>
                 <h3>輕鬆享受台北一日悠閒</h3>
                 <p>探索每個角落，體驗城市的深度旅遊行程</p>
             </div>
-            <form >
+            <form id="keywordform" >
                 <input type="text" name="keyword" placeholder="輸入景點名稱查詢">
                 <button type="submit" class="btn"><img src="/static/icons/icon_search.png" alt="search"/></button>
             </form>
@@ -44,6 +87,7 @@
     </footer>
 
     <script src="../static/js/index.js"></script>
+    <script src="../static/js/signin.js"></script>
 </body>
 
 </html>

@@ -1,4 +1,5 @@
-const form = document.querySelector('form')
+const keywordform = document.querySelector('#keywordform')
+
 let content = document.querySelector('.content')
 let page=0;
 let keyword='';
@@ -69,7 +70,8 @@ async function loading(){
 
  function keywordSearch(event){
     event.preventDefault();
-    let text=document.querySelector('input').value;
+    let text=document.querySelector('input[name="keyword"]').value;
+    console.log(text)
     keyword = text;
     page = 0;
     content.textContent = ''
@@ -101,7 +103,7 @@ const footer = document.querySelector('footer')
 let observer = new IntersectionObserver(callback, options)
 // // 設定觀察// 觀察目標元素
 observer.observe(footer)
-form.addEventListener('submit',keywordSearch)
+keywordform.addEventListener('submit',keywordSearch)
 
 
 
