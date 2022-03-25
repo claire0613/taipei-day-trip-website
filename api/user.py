@@ -37,7 +37,6 @@ def signup():
         email = data['email']
         password = data['password']
         is_user_exist= search_users(email = email)
-      
         if not is_user_exist:
             insert_user(name=name,email=email,password=password)
             
@@ -66,7 +65,6 @@ def signin():
             "email": signin['email'],"exp": datetime.utcnow() + timedelta(minutes=1)
         },os.getenv("SECRET_KEY"),algorithm='HS256')
             message = {"ok": True}
-            
             response = make_response(jsonify(message))
             response.set_cookie(key='user_cookie', value=token)
             return response
