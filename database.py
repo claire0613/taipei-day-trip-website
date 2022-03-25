@@ -109,20 +109,7 @@ def search_attractionid(data):
 
 def search_users(**data):
     email=data['email']
-    
-    if email:
-        sql="SELECT * FROM users WHERE email = %s "
-        value=(email,)
-        result=connection_db(sql,value)
-        if result:
-                return {
-            "id":result[0][0],
-            "name":result[0][1],
-            "email":result[0][2],
-            }
-        else:
-            return None
-    elif data['password']:
+    if data['password']:
         password=data['password']
         sql="SELECT * FROM users WHERE email = %s and password = %s"
         value=(email,password)
@@ -135,12 +122,24 @@ def search_users(**data):
             }
         else:
             return None
+    else: 
+        sql="SELECT * FROM users WHERE email = %s "
+        value=(email,)
+        result=connection_db(sql,value)
+        if result:
+                return {
+            "id":result[0][0],
+            "name":result[0][1],
+            "email":result[0][2],
+            }
+        else:
+            return None
     
 def insert_user(**data):
       sql = "INSERT INTO users (name,email,password) VALUES (%s,%s,%s)"
       value=(data['name'],data['email'],data['password'])
       result=connection_db(sql,value)
-# print(search_users(name='555',email='555@gmail.com',password='555') )
+print(search_users(name='555',email='555@gmail.com',password='555') )
 # insert_user(name='122',email='122@gmail.com',password='122')     
           
     
