@@ -2,8 +2,6 @@ import sys
 sys.path.append("..")
 from database import search_attracion,search_attractionid,attraction_count
 from flask import *
-
-
 api = Blueprint('api', __name__)
 
 @api.route('/attractions', methods=['GET'])
