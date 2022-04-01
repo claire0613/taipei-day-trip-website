@@ -38,9 +38,10 @@ def signup():
         password = data['password']
         is_user_exist= search_users(email = email)
         if not is_user_exist:
-            insert_user(name=name,email=email,password=password)
-            
-            return jsonify({"ok":True})
+            insert=insert_user(name=name,email=email,password=password)
+            if  insert:
+                return jsonify({"ok":True})
+            return jsonify({"error": True, "message": "資料庫註冊失敗"})
         else:
             return jsonify({ "error": True, "message": "註冊失敗，此Email已被註冊" })
     # 伺服器錯誤
@@ -62,7 +63,7 @@ def signin():
             token=jwt.encode({
             "id": signin['id'],
             "name": signin['name'],
-            "email": signin['email'],"exp": datetime.utcnow() + timedelta(minutes=1)
+            "email": signin['email'],"exp": datetime.utcnow() + timedelta(days=1)
         },os.getenv("SECRET_KEY"),algorithm='HS256')
             message = {"ok": True}
             response = make_response(jsonify(message))

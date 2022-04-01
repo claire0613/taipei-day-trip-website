@@ -80,15 +80,20 @@ nav{
 }
 
 
-.nav-link>#signin-up-btn{
+.nav-link>:is(#signin-up-btn,#signout-btn){
     display: none;
     margin: 10px;
     color: #666666;
     cursor: pointer;
     font-size: 16px;
-    line-height: 14px;
-    
-    
+    line-height: 14px;  
+}
+.nav-link>#booking-page{
+    margin: 10px;
+    color: #666666;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 14px;  
 }
 /* #signin-up-btn{
     color: #666666;
@@ -96,7 +101,7 @@ nav{
     font-size: 16px;
     line-height: 14px;
 } */
-#signout-btn{
+/* #signout-btn{
     display: none;
     color: #666666;
     cursor: pointer;
@@ -104,7 +109,7 @@ nav{
     font-size: 16px;
     line-height: 14px;
 
-}
+} */
 
 
 

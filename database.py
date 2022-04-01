@@ -2,6 +2,7 @@ import mysql.connector.pooling
 from mysql.connector import Error
 import json
 import os
+from datetime import datetime, timedelta
 from dotenv import load_dotenv
 load_dotenv()
 dbconfig = {
@@ -107,39 +108,74 @@ def search_attractionid(data):
 # for api/users
 
 
-def search_users(**data):
-    email=data['email']
-    if data['password']:
-        password=data['password']
+def search_users(email,password=None):
+    if password:
         sql="SELECT * FROM users WHERE email = %s and password = %s"
         value=(email,password)
-        result=connection_db(sql,value)
-        if result:
-            return {
-            "id":result[0][0],
-            "name":result[0][1],
-            "email":result[0][2],
-            }
-        else:
-            return None
     else: 
         sql="SELECT * FROM users WHERE email = %s "
         value=(email,)
-        result=connection_db(sql,value)
-        if result:
-                return {
-            "id":result[0][0],
-            "name":result[0][1],
-            "email":result[0][2],
-            }
-        else:
-            return None
+    result=connection_db(sql,value)
+
+    if result:
+            return {
+        "id":result[0][0],
+        "name":result[0][1],
+        "email":result[0][2],
+        }
+    else:
+        return None
     
 def insert_user(**data):
-      sql = "INSERT INTO users (name,email,password) VALUES (%s,%s,%s)"
-      value=(data['name'],data['email'],data['password'])
-      result=connection_db(sql,value)
-print(search_users(name='555',email='555@gmail.com',password='555') )
-# insert_user(name='122',email='122@gmail.com',password='122')     
-          
-    
+    sql = "INSERT INTO users (name,email,password) VALUES (%s,%s,%s)"
+    value=(data['name'],data['email'],data['password'])
+    result=connection_db(sql,value)
+    if result:
+        return True
+    return None
+
+
+# for /api/booking
+def search_booking(user_id):
+    sql="""SELECT a.id, a.name, a.address, a.images, b.date, b.time, b.price 
+            FROM bookings as b JOIN attractions as a ON b.attractionId = a.id WHERE b.userId=%s"""
+    value=(user_id,)
+    result=connection_db(sql,value)
+    if result:
+        return {
+            "id": result[0][0],
+            "name": result[0][1],
+            "address":result[0][2],
+            "image":json.loads(result[0][3])[0],
+            "date": result[0][4],
+            "time": result[0][5],
+            "price": result[0][6]
+            }
+        
+    else:
+        return None
+def insert_booking(user_id, attraction_id, date, time, price):
+    sql="SELECT * FROM bookings WHERE userId=%s"
+    value=(user_id,)
+    has_user_booking=connection_db(sql,value)
+    if has_user_booking==[]:
+        sql="INSERT INTO bookings (userId, attractionId, date, time, price) VALUE (%s,%s,%s,%s,%s)"
+        value=(user_id, attraction_id, date, time, price)
+        result=connection_db(sql,value)
+    else:
+        sql="UPDATE bookings SET attractionId =%s, date=%s, time=%s, price=%s WHERE userId=%s"
+        value=(attraction_id, date, time, price,user_id)
+        result=connection_db(sql,value)
+        
+def remove_booking(user_id):
+    sql="DELETE FROM bookings WHERE userId=%s"
+    value=(user_id,)
+    result=connection_db(sql,value)
+    if result:
+        return True
+    return None
+
+
+# search_users(email='333@gmail.com',password='333')
+# print(search_booking(user_id=8))
+# insert_booking(user_id=8, attraction_id=2, date='2022-04-04', time="morning", price=2000)

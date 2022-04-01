@@ -4,26 +4,118 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <link rel="stylesheet" href="../static/css/nav.css" />
+    <link rel="stylesheet" href="../static/css/booking.css" />
+    <link rel="stylesheet" href="../static/css/footer.css" />
+
+    <title>Booking</title>
 </head>
 <body>
     <nav>
         <div class="navframe">
             <div class="topic"><a href="/">台北一日遊</a></div>
-            <div class="menu">
-                <a href="/templates/index.html">預定行程</a>
-                <a href="/templates/index.html">登入/註冊</a>
+            <div class="nav-link">
+                <a href="/booking" class="booking-page">預定行程</a>
+                <div id="signin-up-btn" class="show">登入/註冊</div>
+                <div id="signout-btn">登出系統</div>
             </div>
         </div>
     </nav>
-    <section>
-        <div>
-            <div>
-                
+    <section class="signpage">
+        <div class="sign-container show">
+            <div class="topbar"></div>
+            <div class="form-content">
+                <form id="signin">
+                    <h3 class="form-title">登入會員帳號
+                        <div class="close-btn">✕</div>
+                    </h3>
+                    <div class="input-content">
+                        <input type="email" placeholder="輸入電子信箱" name="email" required>
+                        <input type="password" placeholder="輸入密碼" name="password" required>
+                        <button type="submit">登入帳戶</button>
+                    </div>
+                    <p class="message"></p>
+                    <p class="convert-sign">還沒有帳戶？點此註冊</p>
+                </form>
             </div>
         </div>
-
+     
+        <div class="sign-container">
+            <div class="topbar"></div>
+            <div class="form-content">
+                <form id="signup">
+                    <h3 class="form-title">註冊會員帳號
+                        <div class="close-btn">✕</div>
+                    </h3>
+                    <div class="input-content">
+                        <input type="text" placeholder="輸入姓名" name="name" required>
+                        <input type="email" placeholder="輸入電子信箱" name="email" required>
+                        <input type="password" placeholder="輸入密碼" name="password" required>
+                        <button type="submit">註冊帳戶</button>
+                    </div>
+                    <p class="message"></p>
+                    <p class="convert-sign">已經有帳戶了？點此登入</p>
+                </form>
+            </div>
+        </div> 
     </section>
+    <main>
+        <h3 class="title"></h3>
+        <div class="booking-box">
+  
+           
+        </div>
 
+    
+        <form class="booking-order">
+            <div class="line"></div>
+            <div class="info">
+                <h3>您的聯絡資訊</h3>
+                <div>
+                    <label for="name">聯絡姓名：</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div>
+                    <label for="email">連絡信箱：</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div>
+                    <label for="phone">手機號碼：</label>
+                    <input type="text" id="phone" name="phone" pattern="09[0-9]{8}" required>
+                </div>
+                <p>請保持手機暢通，準時到達，導覽人員將用手機與您聯繫，務必留下正確的聯絡方式。</p>
+            </div>
+            <div class="line"></div>
+            <div class="pay-info">
+                <h3>信用卡付款資訊</h3>
+                <div class="creditcard-group">
+                    <label for="card-number">卡片號碼：</label>
+                    <div class="field" id="card-number">**** **** **** ****</div>
+                </div>
+                <div class="expiration-date-group">
+                    <label for="expiration-date">過期時間：</label>
+                    <div class="field" id="expiration-date">MM/YY</div>
+                </div>
+                <div class="csv-group">
+                    <label for="card-ccv">驗證號碼：</label>
+                    <div class="field" id="card-ccv">CVV</div>
+                </div>
+              
+            </div>
+            <div class="line"></div> 
+            <div class="confirm">
+                <p class="message"></p>
+                <p>總價：新台幣 <span class="total-price"></span> 元</p>
+                <button type="submit" disabled>確認訂購並付款</button>
+            </div>
+        </form>     
+    </main>
+    <footer>
+        <p>COPYRIGHT © 2021 台北一日遊</p>
+    </footer>
+   
+    <script src="../static/js/signin.js"></script>
+    <script src="../static/js/booking.js"></script>
 </body>
 </html>
