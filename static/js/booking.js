@@ -101,8 +101,7 @@ async function getBookingData(){
         prime.innerHTML=booking.price
         bookingOrderForm.classList.add('show')
 
-        }  
-        
+        } 
         if(bookingBox.innerText === ''){
             noBooking()
         }
@@ -135,9 +134,9 @@ function deleteBooking(e){
 
 // 沒有任何行程時不顯示表單
 function noBooking(){
-    const noBooking = document.createElement('h4')
+    const noBooking = document.createElement('div')
     noBooking.innerText = '目前沒有任何待預定的行程'
-    noBooking.classList.add('error-message')
+    noBooking.classList.add('notice')
     bookingOrderForm.classList.remove('show')
     bookingBox.append(noBooking)
 }

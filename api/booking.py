@@ -32,9 +32,10 @@ def get_booking():
                "price":  searchingbooking["price"],
             }
                 return jsonify({ "data": data })
-           
+            else:
+                return jsonify({ "message": "目前沒有行程"})
         else:
-            return None
+            return jsonify({"error":True,"message":"請先登入"})
             
     except:
         return jsonify({"error": True, "message": "伺服器內部錯誤"})
