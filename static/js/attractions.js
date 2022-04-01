@@ -168,8 +168,8 @@ function bookingSubmit(e){
                 .then(res => res.json())
                 .then(result => {
                     if(result.ok === true){
-                        const bookingPage = document.querySelector('.nav-link .booking-page')
-                        bookingPage.click()
+                        
+                        location.replace('/booking')
                     }else{
                         alert(result.message)
                     }

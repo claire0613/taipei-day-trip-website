@@ -133,7 +133,6 @@ signinForm.addEventListener('submit', signin)
             }
         })
 }
-
 signinCheck()
 //登出
 function signout(){
@@ -141,7 +140,7 @@ function signout(){
         method: 'DELETE'
     })
     .then(() => {
-        signinCheck();
+        location.reload();
 
     })
 }
