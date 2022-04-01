@@ -21,10 +21,13 @@ main{
     width: 1200px;
     margin: 0 auto;
 }
-
+.booking-box{
+    width: 1000px;
+    margin: 40px auto 35px auto;
+}
 .scheduleForm{
     display: flex;
-    width: 980px;
+    width: 1000px;
     margin: 0 auto 40px auto;
 
    
@@ -37,7 +40,7 @@ main{
     border-radius: 5px;
 }
 .title{
-    width: 980px;
+    width: 1000px;
     margin: 40px auto 35px auto;
 }
 
@@ -49,7 +52,6 @@ main{
 }
 .notice{
     font-size: 16px;
-    margin:30px 20px;
     color: #666666;
 }
 
@@ -86,7 +88,7 @@ main{
 
 
 .booking-order> :is(.info, .pay-info){
-    width: 980px;
+    width: 1000px;
     margin: 40px auto 35px auto;
 }
 
@@ -125,8 +127,9 @@ main{
 
 /* 確認欄位 */
 .confirm{
+    
+    width: 1000px;
     height: 100px;
-    width: 980px;
     margin: 0 auto 40px;
 }
 
@@ -166,6 +169,9 @@ main{
         padding: 0 10px;
     }
     .title{
+        width: 95%;
+    }
+    .booking-box{
         width: 95%;
     }
     .booking-box>h4{
