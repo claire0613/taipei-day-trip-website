@@ -126,13 +126,18 @@ def search_users(email,password=None):
     else:
         return None
     
-def insert_user(**data):
-    sql = "INSERT INTO users (name,email,password) VALUES (%s,%s,%s)"
-    value=(data['name'],data['email'],data['password'])
-    result=connection_db(sql,value)
-    if result:
+def insert_user(name,email,password):
+    sql="SELECT * FROM users WHERE email=%s"
+    value=(email,)
+    is_email_existing=connection_db(sql,value)
+    print(is_email_existing)
+    if is_email_existing==[]:
+        sql = "INSERT INTO users (name,email,password) VALUES (%s,%s,%s)"
+        value=(name,email,password)
+        result=connection_db(sql,value)
         return True
     return None
+
 
 
 # for /api/booking
@@ -175,7 +180,7 @@ def remove_booking(user_id):
         return True
     return None
 
-
+# print(insert_user(name='2222',email='2222@gmail.com',password='2222'))
 # search_users(email='333@gmail.com',password='333')
 # print(search_booking(user_id=8))
 # insert_booking(user_id=8, attraction_id=2, date='2022-04-04', time="morning", price=2000)
