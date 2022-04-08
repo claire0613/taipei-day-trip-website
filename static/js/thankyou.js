@@ -17,9 +17,11 @@ async function get_order(){
         paystatus.innerText=res.data.status;
         if (res.data.status==0){
             orderStatus.innerText='行程預定成功'
+            paystatus.innerText='已付款'
         }else{
             orderStatus.innerText='行程預定失敗'
             orderStatus.style.color='red'
+            paystatus.innerText='未付款'
         }
 
 
