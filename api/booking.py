@@ -4,6 +4,8 @@ import json
 from datetime import datetime, date
 import jwt
 import os
+from dotenv import load_dotenv
+load_dotenv()
 from database import remove_booking, search_booking,insert_booking
 sys.path.append("..")
 
@@ -17,26 +19,30 @@ def get_booking():
         if token_cookie:
             user=jwt.decode(token_cookie,os.getenv("SECRET_KEY"),algorithms=['HS256'])
             user_id=int(user["id"])
-            searchingbooking=search_booking(user_id=user_id)
-            print(searchingbooking)
-            if searchingbooking:
-                data = {
-               "attraction": {
-                  "id": searchingbooking["id"],
-                  "name": searchingbooking["name"],
-                  "address": searchingbooking["address"],
-                  "image": searchingbooking["image"]
-               },
-               "date": datetime.strftime( searchingbooking["date"], "%Y-%m-%d"),
-               "time": searchingbooking["time"],
-               "price":  searchingbooking["price"],
-            }
-                return jsonify({ "data": data })
+            bookings=search_booking(user_id=user_id)
+            if bookings:
+                booking_list=[]
+                for booking in bookings:
+                    data = {
+                    "bookingId":booking["bookingId"],
+                "attraction": {
+                    "id": booking["attractionId"],
+                    "name": booking["name"],
+                    "address": booking["address"],
+                    "image": booking["image"]
+                },
+                "date": datetime.strftime(booking["date"], "%Y-%m-%d"),
+                "time": booking["time"],
+                "price": booking["price"],
+                    }
+                    booking_list.append(data)  
+                return jsonify({ "data": booking_list })
             else:
-                return jsonify({ "message": "目前沒有行程"})
+                return jsonify({ "data": None,"message":"目前無預定行程" })
+
         else:
             return jsonify({"error":True,"message":"請先登入"})
-            
+
     except:
         return jsonify({"error": True, "message": "伺服器內部錯誤"})
 @api_booking.route('/booking', methods=["POST"])
@@ -82,9 +88,9 @@ def deleteBooking():
    try:
         token_cookie=request.cookies.get('user_cookie')
         if token_cookie:
-            user=jwt.decode(token_cookie,os.getenv("SECRET_KEY"),algorithms=['HS256'])
-            user_id = int(user["id"])
-            remove=remove_booking(user_id = user_id)
+            booking=request.json
+            booking_id=booking["bookingId"]
+            remove=remove_booking(booking_id = booking_id)
             if remove:
                 return jsonify({ "ok": True })
             else:

@@ -22,14 +22,14 @@ afternoon.addEventListener('click', ()=>{
 
 
 const attractionId = document.URL.split('/').slice(-1); 
-let apiurl=`/api/attraction/`+attractionId;
+let attractionapi=`/api/attraction/`+attractionId;
 
 
 
 async function attractions(){
     if (id==null) {return}
 
-    let result=await fetch(apiurl,{method:"GET"});
+    let result=await fetch(attractionapi,{method:"GET"});
     let data=await result.json();
     //寫入images 和 img_index
     if (data["data"]){

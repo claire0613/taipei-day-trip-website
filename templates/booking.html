@@ -60,11 +60,17 @@
             </div>
         </div> 
     </section>
+    <section class=Info-container>
+        <div class="order-success">
+            <div class="topbar"></div>
+            <h3 style="padding:75px">付款成功</h3>
+        </div>
+    </section>
+
     <main>
         <h3 class="title"></h3>
         <div class="booking-box">
-  
-           
+
         </div>
 
     
@@ -91,31 +97,32 @@
                 <h3>信用卡付款資訊</h3>
                 <div class="creditcard-group">
                     <label for="card-number">卡片號碼：</label>
-                    <div class="field" id="card-number">**** **** **** ****</div>
+                    <div class="field" id="card-number"></div>
                 </div>
                 <div class="expiration-date-group">
-                    <label for="expiration-date">過期時間：</label>
-                    <div class="field" id="expiration-date">MM/YY</div>
+                    <label for="card-expiration-date">過期時間：</label>
+                    <div class="field" id="card-expiration-date"></div>
                 </div>
                 <div class="csv-group">
                     <label for="card-ccv">驗證號碼：</label>
-                    <div class="field" id="card-ccv">CVV</div>
+                    <div class="field" id="card-ccv"></div>
                 </div>
               
             </div>
             <div class="line"></div> 
             <div class="confirm">
-                <p class="message"></p>
+                <p class="error-msg"></p>
                 <p>總價：新台幣 <span class="total-price"></span> 元</p>
-                <button type="submit" disabled>確認訂購並付款</button>
+                <button type="submit" id="order-btn" disabled>確認訂購並付款</button>
             </div>
         </form>     
     </main>
     <footer>
         <p>COPYRIGHT © 2021 台北一日遊</p>
     </footer>
-   
+    <script src="https://js.tappaysdk.com/tpdirect/v5.8.0"></script>
     <script src="../static/js/signin.js"></script>
     <script src="../static/js/booking.js"></script>
+ 
 </body>
 </html>
