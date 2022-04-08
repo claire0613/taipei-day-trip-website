@@ -42,6 +42,23 @@ mycursor.execute("""
    """
 )
 
+mycursor.execute("""
+   CREATE TABLE IF NOT EXISTS bookings(
+    id BIGINT NOT NULL AUTO_INCREMENT, 
+    attractionId INT NOT NULL, 
+    userId BIGINT NOT NULL, 
+    date DATE NOT NULL, 
+    time VARCHAR(255) NOT NULL, 
+    price INT NOT NULL,
+    status INT DEFAULT 1,
+    totalPrice INT ,
+    ordernum varchar(255) DEFAULT NULL,
+    rec_trade_id VARCHAR(255)DEFAULT NULL,
+    phone VARCHAR(255),
+    PRIMARY KEY(id),
+    FOREIGN KEY(userId)REFERENCES users(id)ON DELETE CASCADE) charset=utf8;
+   """
+)
 
 connection.commit()
 

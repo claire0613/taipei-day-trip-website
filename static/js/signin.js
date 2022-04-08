@@ -101,6 +101,7 @@ async function signin(e){
             signinCheck();
             signinupBtn.classList.remove('show');
             signoutBtn.classList.add('show');
+            try{ getBookingData() }catch(e){};
         }
   
         else{ 
@@ -124,6 +125,7 @@ signinForm.addEventListener('submit', signin)
                 signinupBtn.classList.remove('show');
                 signoutBtn.classList.add('show');
                
+               
             }else{
                 signinupBtn.classList.add('show');
                 signoutBtn.classList.remove('show');
@@ -131,7 +133,6 @@ signinForm.addEventListener('submit', signin)
             }
         })
 }
-
 signinCheck()
 //登出
 function signout(){
@@ -139,8 +140,25 @@ function signout(){
         method: 'DELETE'
     })
     .then(() => {
-        signinCheck();
+        location.reload();
 
     })
 }
+
 signoutBtn.addEventListener('click', signout);
+
+
+async function bookingsigninCheck(e){
+    await fetch(userapi,{method:'GET'})
+        .then(res => res.json())
+        .then(result => {
+            if(result.data){
+                location.replace('/booking')
+            }else{
+
+                showUpSignpage()
+            }
+        })
+}
+const bookingPage= document.querySelector('.nav-link #booking-page')
+bookingPage.addEventListener('click',bookingsigninCheck)

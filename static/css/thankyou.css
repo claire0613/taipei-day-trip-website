@@ -1,0 +1,49 @@
+main{
+    margin: auto;
+}
+.orderinfo-container{
+    margin: auto;
+}
+
+.orderinfo-container>:is(h2,p,div){
+    color: #666666;
+    font-weight: bold;
+    font-size: 1.5rem;
+
+
+} 
+
+.orderinfo-container>h2{
+  padding: 10px;
+
+
+} 
+
+
+.orderinfo-container>.orderstatus{
+    font-size:2rem;
+    text-align: center;
+    color:blue;
+}
+.orderinfo-container{
+    width: 360px;
+    margin: 5% auto 5% auto;
+}
+.orderinfo-container>div{
+text-align:right;
+
+}
+.orderinfo-container>.title{
+padding-top: 10px;
+font-size: 1.5rem;
+}
+footer{
+    height: 100%;
+}
+
+@media (max-width:600px){
+    .orderinfo-container{
+        width: 90%;
+    }
+
+}

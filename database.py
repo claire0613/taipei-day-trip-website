@@ -2,7 +2,9 @@ import mysql.connector.pooling
 from mysql.connector import Error
 import json
 import os
+from datetime import datetime, timedelta
 from dotenv import load_dotenv
+
 load_dotenv()
 dbconfig = {
         'host': os.getenv("SERVER_HOST"),
@@ -107,39 +109,136 @@ def search_attractionid(data):
 # for api/users
 
 
-def search_users(**data):
-    email=data['email']
-    if data['password']:
-        password=data['password']
+def search_users(email,password=None):
+    if password:
         sql="SELECT * FROM users WHERE email = %s and password = %s"
         value=(email,password)
-        result=connection_db(sql,value)
-        if result:
-            return {
-            "id":result[0][0],
-            "name":result[0][1],
-            "email":result[0][2],
-            }
-        else:
-            return None
     else: 
         sql="SELECT * FROM users WHERE email = %s "
         value=(email,)
+    result=connection_db(sql,value)
+
+    if result:
+            return {
+        "id":result[0][0],
+        "name":result[0][1],
+        "email":result[0][2],
+        }
+    else:
+        return None
+    
+def insert_user(name,email,password):
+    sql="SELECT * FROM users WHERE email=%s"
+    value=(email,)
+    is_email_existing=connection_db(sql,value)
+    if is_email_existing==[]:
+        sql = "INSERT INTO users (name,email,password) VALUES (%s,%s,%s)"
+        value=(name,email,password)
         result=connection_db(sql,value)
-        if result:
-                return {
-            "id":result[0][0],
-            "name":result[0][1],
-            "email":result[0][2],
+        return True
+    return None
+
+
+
+# for /api/booking
+def search_booking(user_id):
+    sql="""SELECT b.id,a.id, a.name, a.address, a.images, b.date, b.time, b.price 
+            FROM bookings as b JOIN attractions as a ON b.attractionId = a.id WHERE b.userId=%s and ordernum IS NULL"""
+    value=(user_id,)
+    results=connection_db(sql,value)
+    result_list=[]
+
+    if results:
+        for result in results:
+            data={
+            "bookingId":result[0],
+            "attractionId": result[1],
+            "name": result[2],
+            "address":result[3],
+            "image":json.loads(result[4])[0],
+            "date": result[5],
+            "time": result[6],
+            "price": result[7]
             }
-        else:
-            return None
-    
-def insert_user(**data):
-      sql = "INSERT INTO users (name,email,password) VALUES (%s,%s,%s)"
-      value=(data['name'],data['email'],data['password'])
-      result=connection_db(sql,value)
-print(search_users(name='555',email='555@gmail.com',password='555') )
-# insert_user(name='122',email='122@gmail.com',password='122')     
-          
-    
+            result_list.append(data)
+        return result_list
+        
+    else:
+        return None
+def insert_booking(user_id, attraction_id, date, time, price):
+    # sql="SELECT * FROM bookings WHERE attractionId=%s"
+    # value=(attraction_id,)
+    # has_user_booking=connection_db(sql,value)
+    # if has_user_booking==[]:
+    sql="INSERT INTO bookings (userId, attractionId, date, time, price) VALUE (%s,%s,%s,%s,%s)"
+    value=(user_id, attraction_id, date, time, price)
+    result=connection_db(sql,value)
+    # else:
+    #     sql="UPDATE bookings SET userId =%s, date=%s, time=%s, price=%s WHERE attractionId=%s"
+    #     value=(attraction_id, date, time, price,user_id)
+    #     result=connection_db(sql,value)
+        
+def remove_booking(booking_id):
+    try:
+        sql="DELETE FROM bookings WHERE id=%s"
+        value=(booking_id,)
+        result=connection_db(sql,value)
+        return True
+    except:
+        return None
+
+# def search_order(user_id):
+# print(insert_user(name='2222',email='2222@gmail.com',password='2222'))
+# search_users(email='333@gmail.com',password='333')
+# print(search_booking(user_id=15))
+# insert_booking(user_id=8, attraction_id=2, date='2022-04-04', time="morning", price=2000)
+def update_booking_for_order(user_id,total_price,order_num,phone):
+    try:
+        sql='UPDATE bookings SET totalprice=%s,ordernum=%s,phone=%s WHERE userId=%s and ordernum IS NULL'
+        value=(total_price,order_num,phone,user_id)
+        result=connection_db(sql,value)
+        return True
+    except:
+        return None
+def update_booking_for_pay(order_num,status,rec_trade_id):
+    try:
+        sql='UPDATE bookings SET status=%s,rec_trade_id=%s WHERE ordernum=%s'
+        value=(status,rec_trade_id,order_num)
+        result=connection_db(sql,value)
+        return True
+    except:
+        return None
+def search_ordernum(order_num):
+    try:
+        
+        sql="""SELECT b.id,a.id,a.name,a.address,a.images,b.date,b.time,b.price,b.totalPrice,
+            b.ordernum,b.rec_trade_id,b.status,u.name,u.email,b.phone 
+            FROM bookings as b LEFT JOIN (attractions as a, users as u) ON a.id=b.attractionId and u.id=b.userId WHERE ordernum=%s"""
+        value=(order_num,)
+        results=connection_db(sql,value)
+        result_lst=[]
+        if results:
+            for result in results:
+                data={
+                    "bookingId":result[0],
+                    "attractionId": result[1],
+                    "name": result[2],
+                    "address":result[3],
+                    "image":json.loads(result[4])[0],
+                    "date": result[5],
+                    "time": result[6],
+                    "price":result[7],
+                    "totalPrice": result[8],
+                    "ordernum":result[9],
+                    "rec_trade_id":result[10],
+                    "status":result[11],
+                    "ordername":result[12],
+                    "email":result[13],
+                    "phone":result[14]
+                    }
+                result_lst.append(data)
+                
+            return result_lst
+    except:
+        return None
+

@@ -21,15 +21,15 @@ afternoon.addEventListener('click', ()=>{
 })
 
 
-
+const attractionId = document.URL.split('/').slice(-1); 
+let attractionapi=`/api/attraction/`+attractionId;
 
 
 
 async function attractions(){
     if (id==null) {return}
-    const attractionId = document.URL.split('/').slice(-1); 
-    let apiurl=`/api/attraction/`+attractionId;
-    let result=await fetch(apiurl,{method:"GET"});
+
+    let result=await fetch(attractionapi,{method:"GET"});
     let data=await result.json();
     //寫入images 和 img_index
     if (data["data"]){
@@ -136,3 +136,48 @@ async function attractions(){
 
 
 attractions();
+const bookingInfo=document.querySelector('.bookingInfo')
+// booking-form submit 
+const bookingForm = bookingInfo.querySelector('.bookingform')
+const bookingDateInput = bookingForm.querySelector('input[name="date"]')
+
+
+function bookingSubmit(e){
+    e.preventDefault()
+
+    fetch(userapi)
+        .then(res => res.json())
+        .then(result => {
+            // 有登入
+            if(result.data){
+                let data = {
+                    attractionId : parseInt(attractionId),  
+                    date : this.querySelector('input[name="date"]').value,
+                    time : this.querySelector('input[name="time"]:checked').value,
+                    price : parseInt(this.querySelector('#price').innerText)
+                }
+                const bookingapi = '/api/booking'
+                //將資料傳進後端
+                fetch(bookingapi, {
+                    method: 'POST',
+                    body: JSON.stringify(data),
+                    headers: new Headers({
+                        'Content-Type': 'application/json'
+                    })
+                })
+                .then(res => res.json())
+                .then(result => {
+                    if(result.ok === true){
+                        
+                        location.replace('/booking')
+                    }else{
+                        alert(result.message)
+                    }
+                })
+            }else{  // 沒登入
+                showUpSignpage()
+            }
+        })
+}
+
+bookingForm.addEventListener('submit', bookingSubmit)

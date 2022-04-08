@@ -1,0 +1,211 @@
+h3, p, span, label{
+    color: #666666;}
+
+footer{
+    height: 100%;
+}
+
+button{
+    background: none;
+    border: none;
+    outline: none;
+}
+.line{
+    width: 100%;
+    height: 1px;
+    margin: 40px 0;
+    background-color: #e8e8e8;
+}
+
+main{
+    width: 1200px;
+    margin: 0 auto;
+}
+.booking-box{
+    width: 1000px;
+    margin: 40px auto 35px auto;
+}
+.scheduleForm{
+    display: flex;
+    width: 1000px;
+    margin: 0 auto 40px auto;
+
+   
+}
+.scheduleForm >img{
+    width: 260px;
+    height: 200px;
+    display: block;
+    object-fit: cover;
+    border-radius: 5px;
+}
+.title{
+    width: 1000px;
+    margin: 40px auto 35px auto;
+}
+
+.scheduleForm>.info-box{
+    position: relative;
+    width: 700px;
+    height: 200px;
+    margin-left: 22px;
+}
+.notice{
+    font-size: 16px;
+    color: #666666;
+}
+
+.scheduleForm>.info-box>h4{
+    margin-bottom: 20px;
+    color: #448899;
+}
+
+.scheduleForm>.info-box>button{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+    cursor: pointer;
+}
+.scheduleForm>.info-box>div{
+    margin-bottom: 10px;
+ 
+}
+.scheduleForm>.info-box label{
+    font-weight: bold;
+}
+
+
+/* 實際要輸入的表單內容 */
+.booking-order{
+    display: none;
+}
+.booking-order.show{
+    display: block;
+}
+
+
+.booking-order> :is(.info, .pay-info){
+    width: 1000px;
+    margin: 40px auto 35px auto;
+}
+
+
+.booking-order>.info>h3{
+    margin-bottom: 20px;
+}
+
+.booking-order>.info>div{
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+
+
+.booking-order :is(input, .field){
+    width: 200px;
+    padding: 5px;
+    border:1px solid #E8E8E8;
+    border-radius: 5px;
+    height: 35px;
+    
+}
+.booking-order :is(.field){
+    color: #757575;
+}
+
+.booking-order :is(h3,.creditcard-group,.expiration-date-group,.csv-group){
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.booking-order p{
+    font-weight: bold;
+}
+
+/* 確認欄位 */
+.confirm{
+    
+    width: 1000px;
+    height: 100px;
+    margin: 0 auto 40px;
+}
+
+.confirm *{
+    margin-left: auto;
+}
+
+.confirm p{
+    margin-bottom: 20px;
+    width: fit-content;
+}
+
+.confirm button{
+    display: block;
+    background: #448899;
+    border-radius: 5px;
+    padding: 10px 20px;
+    color: #ffffff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.confirm button:disabled{
+    background: rgb(168, 168, 168);
+    cursor: auto;
+}
+
+.error-msg{
+    color: rgb(255, 30, 0);
+
+}
+
+
+@media (max-width:1200px){
+    main{
+        width: 100%;
+        padding: 0 10px;
+    }
+    .title{
+        width: 95%;
+    }
+    .booking-box{
+        width: 95%;
+    }
+    .booking-box>h4{
+        width: 95%;
+    }
+    .scheduleForm{
+        width: 95%;
+     
+    }
+    .booking-order, .booking-order :is(.info, .confirm){
+        width: 95%;
+    }
+    
+}
+
+
+@media (max-width:600px){
+    .scheduleForm{
+        flex-wrap: wrap;
+        width: 95%;
+        justify-content: center;
+    }
+    .scheduleForm>img{
+        width: 95%;
+        height: 70%;
+    }
+    .scheduleForm>.info-box{
+        margin-top: 30px;
+        width: 95%;
+        margin-left: 0px;
+    }
+
+    .scheduleForm>.info-box>button{
+        bottom: 0;
+        top: auto;
+    }
+}
