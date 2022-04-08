@@ -12,15 +12,29 @@ main{
 
 
 } 
+
+.orderinfo-container>h2{
+  padding: 10px;
+
+
+} 
+
+
+.orderinfo-container>.orderstatus{
+    font-size:2rem;
+    text-align: center;
+    color:blue;
+}
 .orderinfo-container{
     width: 360px;
-    margin: 5% 5% 5% 5%;
+    margin: 5% auto 5% auto;
 }
 .orderinfo-container>div{
 text-align:right;
 
 }
 .orderinfo-container>.title{
+padding-top: 10px;
 font-size: 1.5rem;
 }
 footer{

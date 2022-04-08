@@ -1,13 +1,6 @@
-from tkinter.tix import Tree
-from turtle import update
 from flask import Blueprint, session, request, jsonify
-
-import requests
-import sys
-import json
-from datetime import datetime, date
-import jwt
-import os
+import requests,json,jwt,os
+from datetime import datetime
 from database import search_booking, search_ordernum, update_booking_for_order, update_booking_for_pay
 from dotenv import load_dotenv
 load_dotenv()
@@ -111,13 +104,13 @@ def post_order():
                     else:
                         tappay={
                             "error":True,
-                            "message": "付款狀態更改失敗"
+                            "message": {"details":"付款狀態更改失敗","number": order_num,}
                             }
                     return jsonify(tappay)
                 else:
                     tappay={
                             "error":True,
-                            "message": "付款失敗"
+                            "message": {"details":"付款失敗","number": order_num,}
                             }
                     return jsonify(tappay)
                 

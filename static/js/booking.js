@@ -177,19 +177,21 @@ async function getBookingData(){
                         })
                     })
                     .then(res=>res.json())
-                    .then(result=>{if(result.data){
-                        if(result.data.payment.status == 0){
-                            // infoContain.classList.add('show')
-                            // orderinfo.classList.add('show')
-                            location.replace(`/thankyou?number=${result.data.number}`)
+                    .then(result=>{
+                        let resultorderNum;
+                        console.log(result)
+                        console.log(result.data)
+                        if(result.data != undefined){
+                                //     // infoContain.classList.add('show')
+                                //     // orderinfo.classList.add('show')
+                                errorMessage.innerText = result.data.payment.message
+                                resultorderNum=result.data.number
+                            } else{
+                            errorMessage.innerText =  result.message.details
+                            resultorderNum=result.message.number                 
+                        } 
 
-                            
-                            
-                        }else{
-                            errorMessage.innerText =  result.data.payment.message
-                        }
-                    }else{
-                        errorMessage.innerText = result.message}
+                    location.replace('/thankyou?number='+resultorderNum)
                     })
                     // .then(()=>{setTimeout(()=>{
                     // infoContain.classList.remove('show')
