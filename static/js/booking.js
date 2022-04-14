@@ -268,9 +268,6 @@ getBookingData()
 
 // TapPay付款相關函式
 
-
-
-
 // 設置好等等 GetPrime 所需要的金鑰
 TPDirect.setupSDK(124040, 'app_u0KOcvz4md0vhyEfU4nojM7K9wiIy1jEC2GYreFXVMwlJzF3kEfRV4hHSMcU', 'sandbox')
 
@@ -304,10 +301,6 @@ TPDirect.card.onUpdate(function (update) {
     }
 
   })
-
-  // call TPDirect.card.getPrime when user submit form to get tappay prime
-
-
 
 
 // orderBtn.addEventListener('submit',orderSubmit)
