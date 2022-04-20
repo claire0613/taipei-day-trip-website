@@ -15,7 +15,7 @@ const pwdEditIcon=document.querySelector('#pwd-edit-icon')
 const pwdSaveIcon=document.querySelector('#pwd-save-icon')
 const memberRightBtn=document.querySelector('#rightbtn')
 const memberleftBtn=document.querySelector('#leftbtn')
-
+const memberpageError=document.querySelector('.error-msg')
 
 
 async function getMemberInfo(){
@@ -45,47 +45,46 @@ async function getMemberoder(){
     const orderLinkDiv=document.querySelector('.order-link');
     orderLinkDiv.innerHTML="";
     oredernextPage=await result.nextPage;
-    console.log(oredernextPage)
 
     
-    if (ordersLink!==null){
+    if (ordersLink!==undefined){
         ordersLink.forEach(order => {
-            const orderlink = document.createElement('a')
-            orderlink.href = `/thankyou?number=${order['ordernum']}`
-            const ordernumDiv=document.createElement('div')
-            ordernumDiv.innerHTML=order['ordernum']
-            ordernumDiv.classList.add('ordernumber')
-            const tripDiv=document.createElement('div')
-            tripDiv.classList.add('trip-list')
+            const orderlink = document.createElement('a');
+            orderlink.href = `/thankyou?number=${order['ordernum']}`;
+            const ordernumDiv=document.createElement('div');
+            ordernumDiv.innerHTML=order['ordernum'];
+            ordernumDiv.classList.add('ordernumber');
+            const tripDiv=document.createElement('div');
+            tripDiv.classList.add('trip-list');
             order['trip'].forEach(attraction=>{
-                const tripDetail=document.createElement('div')
-                tripDetail.classList.add('trip-list-detail')
-                const attrName=document.createElement('div')
-                attrName.innerHTML=attraction['attractionName']
-                attrName.classList.add('attr-name')
-                const dateDiv=document.createElement('div')
-                dateDiv.innerHTML=attraction['date']
-                dateDiv.classList.add('date')
-                const priceDiv=document.createElement('div')
-                priceDiv.innerHTML=attraction['price']
-                priceDiv.classList.add('price')
-                tripDetail.append(attrName,dateDiv,priceDiv)
-                tripDiv.append(tripDetail)
+                const tripDetail=document.createElement('div');
+                tripDetail.classList.add('trip-list-detail');
+                const attrName=document.createElement('div');
+                attrName.innerHTML=attraction['attractionName'];
+                attrName.classList.add('attr-name');
+                const dateDiv=document.createElement('div');
+                dateDiv.innerHTML=attraction['date'];
+                dateDiv.classList.add('date');
+                const priceDiv=document.createElement('div');
+                priceDiv.innerHTML=attraction['price'];
+                priceDiv.classList.add('price');
+                tripDetail.append(attrName,dateDiv,priceDiv);
+                tripDiv.append(tripDetail);
             })
-            const totalPriceDiv=document.createElement('div')
-            totalPriceDiv.innerHTML=order['totalPrice']
-            totalPriceDiv.classList.add('totalprice')
-            const orderStatus=document.createElement('div')
-            orderStatus.innerHTML=(order['status']==0)?'已付款':'未付款'
-            orderStatus.classList.add('status')
-            orderlink.append(ordernumDiv,tripDiv,totalPriceDiv,orderStatus)
-            orderLinkDiv.append(orderlink)
+            const totalPriceDiv=document.createElement('div');
+            totalPriceDiv.innerHTML=order['totalPrice'];
+            totalPriceDiv.classList.add('totalprice');
+            const orderStatus=document.createElement('div');
+            orderStatus.innerHTML=(order['status']==0)?'已付款':'未付款';
+            orderStatus.classList.add('status');
+            orderlink.append(ordernumDiv,tripDiv,totalPriceDiv,orderStatus);
+            orderLinkDiv.append(orderlink);
 
-
+            memberpageError.innerHTML='';
         });
 
         }else{
-            orderLinkDiv.innerHTML='未曾有訂單'
+            memberpageError.innerHTML='未曾有訂單';
 
         }
 

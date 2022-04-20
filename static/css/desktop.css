@@ -90,14 +90,16 @@
     border-radius: 5px;
     border: 1px solid #E8E8E8;
     box-sizing: border-box;
-
 }
 
 .content>.box> a>img {
     width: 270px;
     height: 170px;
     border-radius: 5px 5px 0 0;
+
+   
 }
+
 .content>.box>.name{
     color: #757575;
     font-weight: 700;

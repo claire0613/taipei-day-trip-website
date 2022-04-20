@@ -77,9 +77,12 @@ main{
     
 }
 .order-list{
+    display: flex;
     width: 100%;
     margin: auto;
     position: relative;
+    flex-direction: column;
+    justify-content: center;
     
 }
 
@@ -114,14 +117,17 @@ main{
     flex-grow: 1;
    
 }
+.table-head>.attr-name{
+    padding-left: 20px;
+}
 
 
 
-
-/* 
-.order-link{
-    margin-bottom: 20px;
-} */
+.error-msg{
+    font-size: 18px;
+    color:#666666;
+    text-align: center;
+}
 
 
 
@@ -158,11 +164,12 @@ main{
     height: 80px;
     text-align: center;
     align-items: center;
+    padding-left: 15px;
 }
 .trip-list-detail div{
     width: 120px;
+   
 }
-
 
 .order-container .render a{
     width: 100px;
@@ -207,7 +214,7 @@ main{
 
 }
 
-@media (max-width:600px){
+@media (max-width:700px){
     .user-img{
         width: 100px;
         height: 100px;

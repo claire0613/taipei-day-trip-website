@@ -125,7 +125,6 @@ async function getBookingData(){
             totalPrice.addPrice=booking.price
   
         });
-        console.log('f',totalPrice.addPrice)
         //有booking時的頁面呈現
         isBooking()
         function orderSubmit(e) {
