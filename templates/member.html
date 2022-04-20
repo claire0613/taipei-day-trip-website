@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/0b26f16c17.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../static/css/nav.css" />
-    <link rel="stylesheet" href="../static/css/thankyou.css" />
+    <link rel="stylesheet" href="../static/css/member.css" />
     <link rel="stylesheet" href="../static/css/footer.css" />
-    <title>Document</title>
+    <title>member</title>
 </head>
 <body>
     <nav>
@@ -90,27 +91,66 @@
             </div>
         </div> 
     </section>
+
     <main>
-        <div class="orderinfo-container">
-            <h2 class="orderstatus"></h2>
-            <h2 style="font-size:1.5rem">您的訂單編號如下:</h2>
-            <p class="orderNum" style="text-align:right"></p>
-            <p class =title>姓名:
-                <div class="ordername"></div></p>
-            <p class =title>狀態:
-                <div class ="status"></div></p>
-            <p class =title>總金額:
-                <div class ="totalPrice"></div></p>
-        </div>
-        
+        <section class="member-info-container">
+            <div class="user-img">
+                <div class="user-captial"></div>
+            </div>
+            <div class="user-info">
+                <div class="username-save ">使用者名稱:
+                    <span class="username-auto"></span>
+                    <button id="username-edit-icon"><i class="fa-solid fa-pencil"></i></button>
+                </div>
+                <div class="username-edit hide"> 使用者名稱:  
+                    <span><input type="text" id="newName" placeholder="輸入新名稱" /></span>
+                    <button id="username-save-icon"><i class="fa-solid fa-file-pen"></i></button>
+                </div>
+                
+                <div class="user-email">帳號信箱:<span id ="email"></span></div>
+                
+                <div class="pwd-save">密碼: 
+                    <span>********</span>
+                    <button id="pwd-edit-icon"><i class="fa-solid fa-pencil"></i></button></div> 
+                <div class ="pwd-edit hide">密碼:
+                    <span><input type="text" id="newPwd" placeholder="輸入新密碼" /></span>
+                    <button id="pwd-save-icon"><i class="fa-solid fa-file-pen"></i></button>
+                    
+                </div>
+                <p class="modified-msg"></p>
+            </div>
+            
+        </section>
+        <section class="order-container">
+            <p>訂單明細:</p>
+            
+            <div class="order-list">
+                <input type="image" name="leftbtn" id="leftbtn" img src="/static/icons/btn_leftArrow.png">
+                <input type="image" name="rightbtn" id="rightbtn" img src="/static/icons/btn_rightArrow.png">
+                <div class="table-head">
+                    <div class="ordernum">訂單編號</div>
+                    <div class="attr-name">景點</div>
+                    <div class="date">日期</div>
+                    <div class="price">價格</div>
+                    <div class="totalprice">總價</div>
+                    <div >狀態</div>
+                </div>
+                
+                <div class="order-link">
+                </div>
+                
+            </div>
+            <div class="render"><a href="/">回首頁</a></div>
+          
+        </section>
     </main>
-  
+
+
     
     <footer>
         <p>COPYRIGHT © 2021 台北一日遊</p>
     </footer>
-
     <script src="../static/js/signin.js"></script>
-    <script src="../static/js/thankyou.js"></script>
+    <script src="../static/js/member.js"></script>
 </body>
 </html>

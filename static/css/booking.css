@@ -116,7 +116,7 @@ main{
     color: #757575;
 }
 
-.booking-order :is(h3,.creditcard-group,.expiration-date-group,.csv-group){
+.booking-order :is(h3,.card-number-group,.expiration-date-group,.csv-group){
     display: flex;
     margin-bottom: 15px;
 }

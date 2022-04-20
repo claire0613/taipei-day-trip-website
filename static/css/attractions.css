@@ -99,21 +99,37 @@ opacity: 1;
     align-items: center;
     
 }
-.date>div{
+
+.date>.date-input-div{
     display: flex;
     align-items: center;
     width: 193px;
     height: 35px;
     background-color: #FFFFFF;
+    border-radius: 5px;
+    border: 1px solid white;
  
 }
-.date>div>#date{
+.date>.date-input-div>#date{
     width: 185px;
     height: 25px;
     border: none;
     background-color: #FFFFFF;
+   
 
 }
+.date-input-div.error{
+    border-color: rgba(255, 0, 0, 0.8);
+
+}
+.trip-date-msg{
+    display: none;
+    color: red;
+}
+.trip-date-msg.show{
+    display: block;
+}
+
 
 #time{
     
@@ -146,6 +162,10 @@ opacity: 1;
     margin: 15px 20px;
 
 }
+.btn>span{
+    padding: 0px 0px 10px 30px;
+}
+
 .imgBox #ol{
 z-index: 1;
 margin-bottom: 13px;

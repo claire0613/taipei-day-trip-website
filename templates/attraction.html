@@ -14,10 +14,15 @@
     <nav>
         <div class="navframe">
             <div class="topic"><a href="/">台北一日遊</a></div>
-            <div class="nav-link">
-                <div id="booking-page">預定行程</div>
-                <div id="signin-up-btn" class="show">登入/註冊</div>
-                <div id="signout-btn">登出系統</div>
+            <div class="right">
+                <div class="ham"><img src="/static/icons/hamburger.png" width="30" height="30"></div>
+                <div class="nav-link">
+                    <div id="booking-page">預定行程</div>
+                    <div id="member-page">會員專區</div>
+                    <div id="signin-up-btn" class="show">登入/註冊</div>
+                    <div id="signout-btn">登出系統</div>
+            </div>
+           
             </div>
         </div>
     </nav>
@@ -31,8 +36,18 @@
                         <div class="close-btn">✕</div>
                     </h3>
                     <div class="input-content">
-                        <input type="email" placeholder="輸入電子信箱" name="email" required>
-                        <input type="password" placeholder="輸入密碼" name="password" required>
+                        <div class="verify"input-type="signin">
+                            <input type="email" placeholder="輸入電子信箱" name="email" >
+                            <div class="user-input-msg">
+                                <span></span>
+                            </div>
+                        </div>
+                        <div class="verify"input-type="signin">
+                            <input type="password" placeholder="輸入密碼" name="password">
+                            <div class="user-input-msg">
+                                <span></span>
+                            </div>
+                        </div>
                         <button type="submit">登入帳戶</button>
                     </div>
                     <p class="message"></p>
@@ -49,9 +64,25 @@
                         <div class="close-btn">✕</div>
                     </h3>
                     <div class="input-content">
-                        <input type="text" placeholder="輸入姓名" name="name" required>
-                        <input type="email" placeholder="輸入電子信箱" name="email" required>
-                        <input type="password" placeholder="輸入密碼" name="password" required>
+                        <div class="verify" input-type="signup">
+                            <input type="text" placeholder="輸入姓名" name="name" >
+                            <div class="user-input-msg">
+                                <span></span>
+                            </div>
+                        </div>
+                        <div class="verify" input-type="signup">
+                            <input type="email" placeholder="輸入電子信箱" name="email" >
+                            <div class="user-input-msg">
+                                <span></span>
+                            </div>
+                        </div>
+                        <div class="verify"input-type="signup">
+                            <input type="password" placeholder="輸入密碼" name="password">
+                            <div class="user-input-msg">
+                                <span></span>
+                            </div>
+                        </div>
+
                         <button type="submit">註冊帳戶</button>
                     </div>
                     <p class="message"></p>
@@ -82,22 +113,23 @@
                 <p>以此景點為中心的一日行程，帶您探索城市角落故事</p>
                 <div class="date">
                     <span id="booking_title">選擇日期:</span>
-                    <div><input id="date"type="date" name="date" required></div>
+                    <div class="date-input-div"><input id="date"type="date" name="date"></div>
                   
                 </div>
                 <div class="block">
                 <span id="booking_title">選擇時間:  </span> 
-                <input id="time" type="radio"  name="time" value="morning" required>
+                <input id="time" type="radio"  name="time" value="morning" checked>
                 <label for="time">上半天</label>
                 <input id="time"type="radio"  name="time" value="afternoon" >
                 <label for="time">下半天</label>
                 </div>
                 <div class="block">
-                    <span id="booking_title">導覽行程:</span><span> 新台幣 <span id="price"></span> 元</span>
+                    <span id="booking_title">導覽行程:</span><span> 新台幣 <span id="price">2000</span> 元</span>
                 </div>
             </div>
             <div class="btn">
                 <button type="submit">開始預訂行程</button>
+                <span class="trip-date-msg"></span>
             </div>
             
         </form>
