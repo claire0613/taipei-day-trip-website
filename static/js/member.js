@@ -133,6 +133,7 @@ userNameSaveIcon.addEventListener('click',async(e)=>{
         userNameSave.classList.remove('hide');
         userNameEdit.classList.add('hide');
         userNameAuto.innerHTML=newName;
+        userCaptial.innerHTML=newName[0]
         setTimeout(()=>{modifiedMsg.innerHTML='';},2000)
 
     }else{
