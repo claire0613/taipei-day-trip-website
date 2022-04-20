@@ -70,24 +70,31 @@ def signin():
         email = data['email']
         password = data['password']
         signin = search_users(email=email)
-        passed=check_password_hash(signin['password'],password)
         # 登入成功
-        if passed:
-            token = jwt.encode({
-                "id": signin['id'],
-                "name": signin['name'],
-                "email": signin['email'], "exp": datetime.utcnow() + timedelta(days=1)
-            }, os.getenv("SECRET_KEY"), algorithm='HS256')
-            message = {"ok": True}
-            response = make_response(jsonify(message))
-            response.set_cookie(key='user_cookie', value=token)
+        if signin:
+            passed=check_password_hash(signin['password'],password)
+            if passed:
+                token = jwt.encode({
+                    "id": signin['id'],
+                    "name": signin['name'],
+                    "email": signin['email'], "exp": datetime.utcnow() + timedelta(days=1)
+                }, os.getenv("SECRET_KEY"), algorithm='HS256')
+                message = {"ok": True}
+                response = make_response(jsonify(message))
+                response.set_cookie(key='user_cookie', value=token)
+                return response
+            else:
+                message = {
+                "error": True,
+                "message": "登入失敗，帳號或密碼輸入錯誤"
+            }
+            response = make_response(jsonify(message), 400)
             return response
-
         # 登入失敗
         else:
             message = {
                 "error": True,
-                "message": "登入失敗，帳號或密碼輸入錯誤"
+                "message": "請帳號不存在，請註冊帳號"
             }
             response = make_response(jsonify(message), 400)
             return response
