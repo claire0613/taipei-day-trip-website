@@ -178,8 +178,6 @@ async function getBookingData(){
                     .then(res=>res.json())
                     .then(result=>{
                         let resultorderNum;
-                        console.log(result)
-                        console.log(result.data)
                         if(result.data != undefined){
                                 errorMessage.innerText = result.data.payment.message
                                 resultorderNum=result.data.number
