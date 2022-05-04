@@ -8,6 +8,7 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 app = Flask(__name__)
+
 # register blueprint
 app.register_blueprint(api, url_prefix='/api')
 app.register_blueprint(api_user, url_prefix='/api')
@@ -48,6 +49,10 @@ def thankyou():
 def member():
     return render_template("member.html")
 
+
+@app.route("/loaderio-ce8dc6e38fb4f981f9c63b872310eda0/")
+def test():
+    return render_template("index.html")
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0',port=3000)
