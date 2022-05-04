@@ -52,7 +52,7 @@ def member():
 
 @app.route("/loaderio-ce8dc6e38fb4f981f9c63b872310eda0/")
 def test():
-    return render_template("index.html")
+    return render_template("test.html")
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0',port=3000)
