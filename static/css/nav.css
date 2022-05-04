@@ -32,6 +32,7 @@ nav{
     border-bottom:1px solid #e8e8e8;
    
    
+   
 }
 .navframe{
     display: flex;
@@ -59,58 +60,46 @@ nav{
     font-weight: bolder;
     
 }
+.right{
+    flex:auto;
+    display: flex;
+    justify-content: flex-end;
+}
 .nav-link{
-    flex:auto ;
     text-align: end;
     display: flex;
     justify-content: end;
     align-items: center;
+    transition: all 0.25 ease;
     
 }
-.nav-link>a{
-    text-decoration: none;
-    margin: 10px;
-    color: #666666;
-    cursor: pointer;
-    font-size: 16px;
-    line-height: 14px;
-}
-.nav-link>:is(#signin-up-btn,#signout-btn).show{
+
+.nav-link>:is(#signin-up-btn,#signout-btn,#member-page).show{
     display:block;
 }
 
 
-.nav-link>:is(#signin-up-btn,#signout-btn){
+.nav-link>:is(#signin-up-btn,#signout-btn,#member-page){
     display: none;
     margin: 10px;
     color: #666666;
     cursor: pointer;
     font-size: 16px;
-    line-height: 14px;  
+    line-height: 14px; 
+    transition: all 0.25s ease; 
 }
 .nav-link>#booking-page{
     margin: 10px;
     color: #666666;
     cursor: pointer;
     font-size: 16px;
-    line-height: 14px;  
+    line-height: 14px;
+    transition: all 0.25s ease; 
 }
-/* #signin-up-btn{
-    color: #666666;
-    cursor: pointer;
-    font-size: 16px;
-    line-height: 14px;
-} */
-/* #signout-btn{
-    display: none;
-    color: #666666;
-    cursor: pointer;
-    margin: 10px;
-    font-size: 16px;
-    line-height: 14px;
 
-} */
-
+.nav-link :is(#signin-up-btn,#signout-btn,#member-page,#booking-page):hover{
+    color:#448899;
+}
 
 
 
@@ -132,7 +121,6 @@ nav{
 .signpage>.sign-container{
     display: none;
     width: 340px;
-    
     margin: auto;
     box-shadow: 0px 4px 60px #AAAAAA;
     border-radius: 6px;
@@ -182,17 +170,18 @@ nav{
 .input-content>*{
     width: 100%;
     border-radius: 5px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
-.input-content>input{
+
+.input-content>.verify>input{
     border: 1px solid #cccccc;
     padding: 15px;
     color: #666666;
     font-size: 16px;
     line-height: 13.3px;
-
-    
+    width: 100%;
+    border-radius: 5px;  
 }
 
 .input-content>button{
@@ -247,4 +236,81 @@ nav{
     display: block;
 
 }
+.verify.invalid >input{
+    border-color: rgba(255, 0, 0, 0.8);
+}
+.verify.valid >input{
+    border-color: rgba(8, 176, 8, 0.891);
+}
 
+.user-input-msg span{
+    font-size: 14px;
+    padding-left:10px;
+    display: none;
+}
+:is(.invalid,.valid)>span{
+    display: block;
+}
+.user-input-msg.invalid{
+    color: red;
+}
+.user-input-msg.valid{
+    color: green;
+    margin: 0; opacity: 0; height: 0px;
+    animation:input-animation 1.3s;
+}
+@keyframes input-animation {
+    0% { margin: 0; opacity: 0; height: 0px; }
+    70% { margin: 2px 0 5px 0; opacity: 1; height: 14px; }
+    100% { margin: 0; opacity: 0; height: 0px; }
+}
+
+
+
+
+
+
+
+
+.ham{
+    display: none;
+    padding: 2px 5px 0px 5px;
+    border: 1px solid  rgba(107, 106, 106, 0.25);
+    border-radius: 5px;
+    margin-right: 15px;
+    cursor: pointer;
+
+    
+}
+
+
+@media (max-width:600px){
+    .ham{
+        display: block;
+        /* position: absolute;
+        right: 10px;
+        top:10px */
+      
+    }
+    .nav-link{
+        display: none;
+    }
+
+    .nav-link.show{
+        display: flex;
+        position: absolute;
+        top: 10px;
+        right: 55px;
+        opacity: 0.85;
+        border-radius: 5px;
+        background-color: #dbd6d6;
+        flex-direction: column;
+        
+        
+    }
+    .nav-link div:hover{
+        color: #448899;
+    }
+   
+
+}

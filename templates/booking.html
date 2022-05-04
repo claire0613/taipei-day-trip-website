@@ -15,13 +15,19 @@
     <nav>
         <div class="navframe">
             <div class="topic"><a href="/">台北一日遊</a></div>
-            <div class="nav-link">
-                <div id="booking-page">預定行程</div>
-                <div id="signin-up-btn" class="show">登入/註冊</div>
-                <div id="signout-btn">登出系統</div>
+            <div class="right">
+                <div class="ham"><img src="/static/icons/hamburger.png" width="30" height="30"></div>
+                <div class="nav-link">
+                    <div id="booking-page">預定行程</div>
+                    <div id="member-page">會員專區</div>
+                    <div id="signin-up-btn" class="show">登入/註冊</div>
+                    <div id="signout-btn">登出系統</div>
+            </div>
+           
             </div>
         </div>
     </nav>
+
     <section class="signpage">
         <div class="sign-container show">
             <div class="topbar"></div>
@@ -31,8 +37,18 @@
                         <div class="close-btn">✕</div>
                     </h3>
                     <div class="input-content">
-                        <input type="email" placeholder="輸入電子信箱" name="email" required>
-                        <input type="password" placeholder="輸入密碼" name="password" required>
+                        <div class="verify"input-type="signin">
+                            <input type="email" placeholder="輸入電子信箱" name="email" >
+                            <div class="user-input-msg">
+                                <span></span>
+                            </div>
+                        </div>
+                        <div class="verify"input-type="signin">
+                            <input type="password" placeholder="輸入密碼" name="password">
+                            <div class="user-input-msg">
+                                <span></span>
+                            </div>
+                        </div>
                         <button type="submit">登入帳戶</button>
                     </div>
                     <p class="message"></p>
@@ -49,9 +65,25 @@
                         <div class="close-btn">✕</div>
                     </h3>
                     <div class="input-content">
-                        <input type="text" placeholder="輸入姓名" name="name" required>
-                        <input type="email" placeholder="輸入電子信箱" name="email" required>
-                        <input type="password" placeholder="輸入密碼" name="password" required>
+                        <div class="verify" input-type="signup">
+                            <input type="text" placeholder="輸入姓名" name="name" >
+                            <div class="user-input-msg">
+                                <span></span>
+                            </div>
+                        </div>
+                        <div class="verify" input-type="signup">
+                            <input type="email" placeholder="輸入電子信箱" name="email" >
+                            <div class="user-input-msg">
+                                <span></span>
+                            </div>
+                        </div>
+                        <div class="verify"input-type="signup">
+                            <input type="password" placeholder="輸入密碼" name="password">
+                            <div class="user-input-msg">
+                                <span></span>
+                            </div>
+                        </div>
+
                         <button type="submit">註冊帳戶</button>
                     </div>
                     <p class="message"></p>
@@ -95,7 +127,7 @@
             <div class="line"></div>
             <div class="pay-info">
                 <h3>信用卡付款資訊</h3>
-                <div class="creditcard-group">
+                <div class="card-number-group">
                     <label for="card-number">卡片號碼：</label>
                     <div class="field" id="card-number"></div>
                 </div>
@@ -107,7 +139,7 @@
                     <label for="card-ccv">驗證號碼：</label>
                     <div class="field" id="card-ccv"></div>
                 </div>
-              
+                <span class="tappay-error"></span>
             </div>
             <div class="line"></div> 
             <div class="confirm">

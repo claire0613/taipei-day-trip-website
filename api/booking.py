@@ -57,7 +57,7 @@ def post_booking():
             date = booking["date"]
             time = booking["time"]
             price = booking["price"]
-            if attraction_id and date and time and price and user_id:
+            if attraction_id and date and (time == 'morning' and price == 2000) or (time == 'afternoon' and price == 2500)and user_id:
                     # 建立行程
                     insert_booking(user_id=user_id, attraction_id=attraction_id, date=date, time=time, price=price)
                     data = {"ok": True}

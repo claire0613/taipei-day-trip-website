@@ -1,0 +1,264 @@
+main{
+    margin: auto;
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center; */
+}
+.member-info-container{
+    width: 600px;
+    margin: 50px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.user-img{
+    width: 150px;
+    height: 150px;
+    background-color: #666666;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+.user-img>.user-captial{
+    font-size: 45px;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.user-info{
+    display: flex;
+    flex-direction: column;
+    padding-left: 50px;
+ 
+}
+.user-info :is(span,button){
+    padding-left: 15px;
+
+}
+.user-info :is(div){
+    padding-bottom: 20px;
+
+}
+
+.user-info input{
+    border-radius: 5px ;
+    margin-bottom: 10px;
+    padding: 5px;
+    border: 1px solid #cccccc;
+}
+
+.hide {
+    display: none
+}
+.modified-msg{
+    color: red;
+}
+.member-info-container button{
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+.order-container{
+    width: 1000px;
+    margin: auto;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    
+}
+.order-container p{
+    font-size: 20px;
+    margin-bottom: 30px;
+    font-weight: bold;
+    color: #05364b;
+    
+}
+.order-list{
+    display: flex;
+    width: 100%;
+    margin: auto;
+    position: relative;
+    flex-direction: column;
+    justify-content: center;
+    
+}
+
+.order-list> #leftbtn{
+    position: absolute;
+    top:45%;
+    left:-10%;
+    z-index: 1;
+    background-color: transparent;
+     
+}
+.order-list> #rightbtn{
+    position: absolute;
+    top:45%;
+    right:-10%;
+    z-index: 1;
+    
+}
+
+
+
+.table-head{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin: 10px 0px;
+    border-bottom: 1px solid #e8e8e8;
+}
+.table-head div{
+    width: 80px;
+    text-align: center;
+    flex-grow: 1;
+   
+}
+.table-head>.attr-name{
+    padding-left: 20px;
+}
+
+
+
+.error-msg{
+    font-size: 18px;
+    color:#666666;
+    text-align: center;
+}
+
+
+
+
+.order-link a{
+    width: 100%;
+    display: flex;
+    text-align: center;
+    color: #666666;
+    text-decoration: none;
+    font-size: 16px;
+    justify-content: space-around;
+    border-bottom: 1px solid #e8e8e8;
+    align-items: center;
+}
+.order-link a :is(.ordernumber,.totalprice,.status){
+    width: 80px;
+    flex-grow: 1;
+}
+.order-link a .trip-list{
+    width: 320px;
+    display: flex;
+    flex-grow: 2;
+    flex-wrap: wrap;
+    justify-content: center;
+
+
+    /* margin: auto; */
+}
+.order-link a .trip-list .trip-list-detail{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    height: 80px;
+    text-align: center;
+    align-items: center;
+    padding-left: 15px;
+}
+.trip-list-detail div{
+    width: 120px;
+   
+}
+
+.order-container .render a{
+    width: 100px;
+    background: #448899;
+    border-radius: 5px;
+    padding: 5px 5px;
+    color: #ffffff;
+    font-size: 30px;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    
+}
+
+.order-container .render{
+    margin: 30px auto;
+    
+    
+}
+@media (max-width:1200px){
+    .member-info-container{
+        width:90%
+    }
+    .order-container{
+        width: 80%;
+    }
+ 
+    .table-head :is(.date,.price,.totalprice){
+        display: none;
+    }
+    .order-link a :is(.ordernumber,.trip-list,.status){
+        width: 100%;
+    }
+
+    .trip-list-detail :is(.date,.price){
+        display: none;
+    }
+    
+    .order-link .totalprice{
+        display: none;
+    }
+
+}
+
+@media (max-width:700px){
+    .user-img{
+        width: 100px;
+        height: 100px;
+    }
+    .user-info{
+        padding-left: 15px;
+    }
+    .user-info :is(div){
+        padding-bottom: 10px;
+    }
+    .order-container{
+        width: 80%;
+    }
+    .order-list> #leftbtn{
+        left:-13%;
+    }
+    .order-list> #rightbtn{
+        right:-13%;
+    }
+
+    .table-head .attr-name{
+        display: none;
+    }
+    .table-head .ordernum{
+        width: 160px;
+    }
+    /* .order-link a {
+        height: 80px;
+    } */
+    /* .order-link a .ordernumber{
+        width: 160px;
+    } */
+    .order-link a .trip-list{
+        display: none;
+    }
+    .order-link a .status{
+        width: 40%;
+    }
+    .order-link a .ordernumber{
+        width: 60%;
+    }
+
+    .trip-list-detail .attr-name{
+        display: none;
+    }
+
+}

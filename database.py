@@ -109,13 +109,10 @@ def search_attractionid(data):
 # for api/users
 
 
-def search_users(email,password=None):
-    if password:
-        sql="SELECT * FROM users WHERE email = %s and password = %s"
-        value=(email,password)
-    else: 
-        sql="SELECT * FROM users WHERE email = %s "
-        value=(email,)
+def search_users(email):
+    
+    sql="SELECT * FROM users WHERE email = %s "
+    value=(email,)
     result=connection_db(sql,value)
 
     if result:
@@ -123,6 +120,7 @@ def search_users(email,password=None):
         "id":result[0][0],
         "name":result[0][1],
         "email":result[0][2],
+        "password":result[0][3]
         }
     else:
         return None
@@ -166,17 +164,11 @@ def search_booking(user_id):
     else:
         return None
 def insert_booking(user_id, attraction_id, date, time, price):
-    # sql="SELECT * FROM bookings WHERE attractionId=%s"
-    # value=(attraction_id,)
-    # has_user_booking=connection_db(sql,value)
-    # if has_user_booking==[]:
+    
     sql="INSERT INTO bookings (userId, attractionId, date, time, price) VALUE (%s,%s,%s,%s,%s)"
     value=(user_id, attraction_id, date, time, price)
     result=connection_db(sql,value)
-    # else:
-    #     sql="UPDATE bookings SET userId =%s, date=%s, time=%s, price=%s WHERE attractionId=%s"
-    #     value=(attraction_id, date, time, price,user_id)
-    #     result=connection_db(sql,value)
+
         
 def remove_booking(booking_id):
     try:
@@ -187,7 +179,7 @@ def remove_booking(booking_id):
     except:
         return None
 
-# def search_order(user_id):
+
 # print(insert_user(name='2222',email='2222@gmail.com',password='2222'))
 # search_users(email='333@gmail.com',password='333')
 # print(search_booking(user_id=15))
@@ -200,6 +192,8 @@ def update_booking_for_order(user_id,total_price,order_num,phone):
         return True
     except:
         return None
+
+
 def update_booking_for_pay(order_num,status,rec_trade_id):
     try:
         sql='UPDATE bookings SET status=%s,rec_trade_id=%s WHERE ordernum=%s'
@@ -208,6 +202,8 @@ def update_booking_for_pay(order_num,status,rec_trade_id):
         return True
     except:
         return None
+
+
 def search_ordernum(order_num):
     try:
         
@@ -241,4 +237,47 @@ def search_ordernum(order_num):
             return result_lst
     except:
         return None
+# for search_order_history
+def search_order_history(user_id):
+    
+    sql="""SELECT a.name,b.date,b.time,b.price,b.totalPrice,
+            b.ordernum,b.status 
+            FROM bookings as b  JOIN attractions as a ON a.id=b.attractionId  WHERE userId=%s and ordernum IS NOT NULL;
+        """
+    value=(user_id,)
+    results=connection_db(sql,value)
+    if results:
+        result_list=[]
+        for result in results:
+            data={
+            "attractionName": result[0],
+            "date": result[1],
+            "time": result[2],
+            "price": result[3],
+            "totalPrice": result[4],
+            "ordernum":result[5],
+            "status":result[6],
+        
+            }
+            result_list.append(data)
+        return result_list
+        
+    else:
+        return None
 
+    
+def updated_name_pwd(user_id=None,new_name=None,pwd=None):
+    try:
+        if new_name:
+                sql="UPDATE  users SET name = %s WHERE id = %s"
+                value=(new_name,user_id)
+                result=connection_db(sql,value)
+              
+        elif pwd:
+                sql="UPDATE  users SET password = %s WHERE id = %s"
+                value=(pwd,user_id)
+                result=connection_db(sql,value)
+        return True
+        
+    except: 
+        return None

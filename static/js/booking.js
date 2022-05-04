@@ -8,11 +8,22 @@ const inputName=bookingOrderForm.querySelector('input[name="name"]')
 const inputEmail = bookingOrderForm.querySelector('input[name="email"]')
 const orderapi='/api/orders'
 const errorMessage = document.querySelector('.error-msg')
+const phonePattern=/09[0-9]{8}/
 let userid=null
-let totalPrice = 0
 
 
-
+class TotalPrice{
+    constructor(){
+        this._totalprice=0
+    }
+    get addPrice(){
+        return this._totalprice
+    }
+    set addPrice(value){
+        this._totalprice+=value
+    }
+}
+let totalPrice = new TotalPrice;
 async function getUserData(){
     fetch(userapi)
     .then(res => res.json())
@@ -31,21 +42,18 @@ async function getUserData(){
 
 getUserData()
 
-
-
-
 // 獲取行程資料
 async function getBookingData(){
     bookingBox.innerHTML = ''
-    totalPrice = 0
     await fetch(bookingapi)
     .then(res => res.json())
     .then(result=>(result.data))
     .then(bookings => {
         const trip=[]
+      
         if (bookings!==null){
-       
         bookings.forEach(booking => {
+     
             let trip_item={
                 "attraction":
                     {
@@ -114,19 +122,11 @@ async function getBookingData(){
             infoBox.append(attractionName, deleteBtn,bookingId, dateBox, timeBox,priceBox,addressBox)
             scheduleForm.append(attractionImg, infoBox)
             bookingBox.append(scheduleForm)
-            totalPrice+=booking.price
-            // prime.innerHTML=booking.price
-            bookingOrderForm.classList.add('show')
+            totalPrice.addPrice=booking.price
+  
         });
-       
-        if(bookingBox.innerText === ''){
-            //無booking時的頁面呈現
-            noBooking()
-        }else{
-            //有booking時的頁面呈現
-            isBooking()
-        }
-
+        //有booking時的頁面呈現
+        isBooking()
         function orderSubmit(e) {
             e.preventDefault();
             // 取得 TapPay Fields 的 status 
@@ -136,7 +136,6 @@ async function getBookingData(){
                 alert('can not get prime')
                 return
             }
-        
         
             // Get prime  讓 button click 之後觸發 getPrime 方法
              
@@ -155,11 +154,11 @@ async function getBookingData(){
                 let name=this.querySelector('input[name="name"]').value
                 let email= this.querySelector('input[name="email"]').value
                 let infoContain=document.querySelector('.Info-container')
-                let orderinfo=infoContain.querySelector('.order-success')
+    
                 data={
                     prime: prime,
                     order: {
-                        price: totalPrice,
+                        price: totalPrice.addPrice,
                         trip: trip,
                         contact: {
                             name: name,
@@ -179,11 +178,7 @@ async function getBookingData(){
                     .then(res=>res.json())
                     .then(result=>{
                         let resultorderNum;
-                        console.log(result)
-                        console.log(result.data)
                         if(result.data != undefined){
-                                //     // infoContain.classList.add('show')
-                                //     // orderinfo.classList.add('show')
                                 errorMessage.innerText = result.data.payment.message
                                 resultorderNum=result.data.number
                             } else{
@@ -193,25 +188,25 @@ async function getBookingData(){
 
                     location.replace('/thankyou?number='+resultorderNum)
                     })
-                    // .then(()=>{setTimeout(()=>{
-                    // infoContain.classList.remove('show')
-                    // orderinfo.classList.remove('show')},1000)})
-                    // .then()
-                    
+
                 }
                 
             )
         
         }
         bookingOrderForm.addEventListener('submit',orderSubmit)
-        // $(document).on('submit',orderBtn,orderSubmit);
-  
 
+    }else{
+        //沒有booking時的頁面呈現
+        noBooking()
     }
-       
     
 });
 }
+
+
+
+
 
 // 刪除行程
 function deleteBooking(e){
@@ -240,13 +235,14 @@ function noBooking(){
     noBooking.classList.add('notice')
     bookingOrderForm.classList.remove('show')
     bookingBox.append(noBooking)
+  
 }
 function isBooking(){
     //顯示下方資訊表單
     bookingOrderForm.classList.add('show')
     //總價格
     const showtotalPrice=document.querySelector('.total-price')
-    showtotalPrice.innerHTML=totalPrice
+    showtotalPrice.innerHTML=totalPrice.addPrice
     //reconfirm all booking form
     const scheduleForms = document.querySelectorAll('form.scheduleForm')
     scheduleForms.forEach(form => {
@@ -255,11 +251,7 @@ function isBooking(){
     
 }
 
-
-
-getBookingData()
-
-
+getBookingData();
 
 // const scheduleForm = document.createElement('form.scheduleForm')
 // $(document).on('submit',scheduleForm,deleteBooking);
@@ -267,7 +259,6 @@ getBookingData()
 
 
 // TapPay付款相關函式
-
 // 設置好等等 GetPrime 所需要的金鑰
 TPDirect.setupSDK(124040, 'app_u0KOcvz4md0vhyEfU4nojM7K9wiIy1jEC2GYreFXVMwlJzF3kEfRV4hHSMcU', 'sandbox')
 
@@ -287,17 +278,49 @@ TPDirect.card.setup({
             element: '#card-ccv',
             placeholder: 'CVV'
         }
+    },
+    styles: {
+        // Style all elements
+        'input': {
+            'color': '#666666'
+        },
+        // Styling ccv field
+        'input.ccv': {
+            'font-size': '16px'
+        },
+        // Styling expiration-date field
+        'input.expiration-date': {
+            'font-size': '16px'
+        },
+        // Styling card-number field
+        'input.card-number': {
+            'font-size': '16px'
+        },
+        // style valid state
+        '.valid': {
+            'color': 'green'
+        },
+        // style invalid state
+        '.invalid': {
+            'color': 'red'
+        }
     }
 })
 
 const orderBtn = document.querySelector('#order-btn')
-
+const tappayErrorMsg=document.querySelector('.tappay-error')
 //得知目前卡片資訊的輸入狀態
-TPDirect.card.onUpdate(function (update) {
+TPDirect.card.onUpdate(function(update) {
     if (update.canGetPrime) {
+        tappayErrorMsg.innerHTML=""
+       
         orderBtn.removeAttribute('disabled')
     } else {
         orderBtn.setAttribute('disabled', true)
+    }
+    // cardTypes = ['mastercard', 'visa', 'jcb', 'amex', 'unionpay','unknown']
+    if (update.cardType === 'visa') {
+        // Handle card type visa.
     }
 
   })
