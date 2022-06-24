@@ -37,7 +37,7 @@ This website is a tourism e-commerce website where users can search the attracti
 ### Front-End Tech Stack
 - JavaScript 
 - HTML
-- CSS / SCSS
+- CSS
 
 ### Network 
 - NGINX 
