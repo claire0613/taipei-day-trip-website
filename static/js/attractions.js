@@ -191,7 +191,7 @@ function bookingSubmit(e){
         return;
     }
     fetch(userapi)
-        .then(res => res.json())
+        .then(res => res.json())    
         .then(result => {
             // 有登入
             

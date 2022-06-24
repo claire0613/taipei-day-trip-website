@@ -41,13 +41,14 @@ async function getMemberoder(){
     const response= await fetch(orderHisapi)
     const promise=await response.json();
     const result =await promise;
-    const ordersLink=await result.data;
+    const ordersLink=await result.data.reverse();
     const orderLinkDiv=document.querySelector('.order-link');
     orderLinkDiv.innerHTML="";
     oredernextPage=await result.nextPage;
 
     
     if (ordersLink!==undefined){
+        
         ordersLink.forEach(order => {
             const orderlink = document.createElement('a');
             orderlink.href = `/thankyou?number=${order['ordernum']}`;
