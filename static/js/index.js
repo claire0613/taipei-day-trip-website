@@ -82,7 +82,7 @@ async function loading(){
 
 
 const options = {
-    rootMargin: "0px 0px 200px 0px",
+    rootMargin: "0px 0px 0px 0px",
     threshold: 0
   }
 let callback = ([entry]) => {
@@ -90,7 +90,7 @@ let callback = ([entry]) => {
             if(!isfetching){
                 loading();
             }
-  
+            // loading();
         }
     
   }
@@ -104,6 +104,8 @@ let observer = new IntersectionObserver(callback, options)
 // // 設定觀察// 觀察目標元素
 observer.observe(footer)
 keywordform.addEventListener('submit',keywordSearch)
+
+
 
 
 
@@ -140,5 +142,5 @@ keywordform.addEventListener('submit',keywordSearch)
 //     }
   
 //     // 註冊 scroll 事件監聽器，使用者滑動頁面觸發 lazyLoad 
-//     window.addEventListener('scroll', nextPage);
+//     window.addEventListener('scroll', lazyLoad);
 //   })

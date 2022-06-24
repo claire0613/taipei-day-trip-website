@@ -1,4 +1,5 @@
 import mysql.connector.pooling
+import mysql.connector
 from mysql.connector import Error
 import json
 import os
@@ -22,11 +23,11 @@ connection_pool = mysql.connector.pooling.MySQLConnectionPool(
         **dbconfig
     )
 def connection_db(sql,value):
+
     try:
         connection = connection_pool.get_connection()
         mycursor = connection.cursor()
         mycursor.execute(sql, value)
-        
         
     except Error as e:
         print("Error while connecting to MySQL using Connection pool ", e)
@@ -40,6 +41,35 @@ def connection_db(sql,value):
         connection.close()
         return result
 
+def connection_db_commit(sql,value):
+    try:
+        connection = connection_pool.get_connection()
+        mycursor = connection.cursor()
+        mycursor.execute(sql, value)  
+        # Commit your changes
+        connection.commit()
+    except mysql.connector.Error as error:
+        print(f"Error while connecting to MySQL using Connection pool{error}")   
+        connection.rollback()
+        # reverting changes because of exception
+    finally:
+            # closing database connection.
+            if connection.is_connected():
+                mycursor.close()
+                connection.close()
+            
+def connection_db_search(sql,value):
+    connection = connection_pool.get_connection()
+    mycursor = connection.cursor()
+    mycursor.execute(sql, value)
+    result=mycursor.fetchall()
+    if connection.is_connected():
+        mycursor.close()
+        connection.close()        
+    return result
+
+
+
 
 # for api/attractions
 
@@ -51,7 +81,7 @@ def attraction_count(**data):
     else:
         sql="SELECT count(name) FROM attractions"
         value=()
-    allcount=connection_db(sql,value)
+    allcount=connection_db_search(sql,value)
   
     if  allcount:
         
@@ -66,7 +96,7 @@ def search_attracion(**data):
     else:
         sql = "SELECT * FROM attractions LIMIT %s , %s" 
         value=(page_12,12)
-    result = connection_db(sql,value)
+    result = connection_db_search(sql,value)
     if result:
         lst = []
         for i in result:
@@ -96,7 +126,7 @@ def search_attractionid(data):
   
     sql="SELECT * FROM attractions WHERE id = %s"
     value=(data,)
-    result =  connection_db(sql,value)
+    result =  connection_db_search(sql,value)
     if result:
         for i in result:
             item=resultformat(i)
@@ -113,7 +143,7 @@ def search_users(email):
     
     sql="SELECT * FROM users WHERE email = %s "
     value=(email,)
-    result=connection_db(sql,value)
+    result=connection_db_search(sql,value)
 
     if result:
             return {
@@ -125,14 +155,16 @@ def search_users(email):
     else:
         return None
     
+
+    
 def insert_user(name,email,password):
     sql="SELECT * FROM users WHERE email=%s"
     value=(email,)
-    is_email_existing=connection_db(sql,value)
+    is_email_existing=connection_db_search(sql,value)
     if is_email_existing==[]:
         sql = "INSERT INTO users (name,email,password) VALUES (%s,%s,%s)"
         value=(name,email,password)
-        result=connection_db(sql,value)
+        result=connection_db_commit(sql,value)
         return True
     return None
 
@@ -143,7 +175,7 @@ def search_booking(user_id):
     sql="""SELECT b.id,a.id, a.name, a.address, a.images, b.date, b.time, b.price 
             FROM bookings as b JOIN attractions as a ON b.attractionId = a.id WHERE b.userId=%s and ordernum IS NULL"""
     value=(user_id,)
-    results=connection_db(sql,value)
+    results=connection_db_search(sql,value)
     result_list=[]
 
     if results:
@@ -167,28 +199,23 @@ def insert_booking(user_id, attraction_id, date, time, price):
     
     sql="INSERT INTO bookings (userId, attractionId, date, time, price) VALUE (%s,%s,%s,%s,%s)"
     value=(user_id, attraction_id, date, time, price)
-    result=connection_db(sql,value)
+    result=connection_db_commit(sql,value)
 
         
 def remove_booking(booking_id):
     try:
         sql="DELETE FROM bookings WHERE id=%s"
         value=(booking_id,)
-        result=connection_db(sql,value)
+        result=connection_db_commit(sql,value)
         return True
     except:
         return None
 
-
-# print(insert_user(name='2222',email='2222@gmail.com',password='2222'))
-# search_users(email='333@gmail.com',password='333')
-# print(search_booking(user_id=15))
-# insert_booking(user_id=8, attraction_id=2, date='2022-04-04', time="morning", price=2000)
 def update_booking_for_order(user_id,total_price,order_num,phone):
     try:
         sql='UPDATE bookings SET totalprice=%s,ordernum=%s,phone=%s WHERE userId=%s and ordernum IS NULL'
         value=(total_price,order_num,phone,user_id)
-        result=connection_db(sql,value)
+        result=connection_db_commit(sql,value)
         return True
     except:
         return None
@@ -198,7 +225,7 @@ def update_booking_for_pay(order_num,status,rec_trade_id):
     try:
         sql='UPDATE bookings SET status=%s,rec_trade_id=%s WHERE ordernum=%s'
         value=(status,rec_trade_id,order_num)
-        result=connection_db(sql,value)
+        result=connection_db_commit(sql,value)
         return True
     except:
         return None
@@ -211,7 +238,7 @@ def search_ordernum(order_num):
             b.ordernum,b.rec_trade_id,b.status,u.name,u.email,b.phone 
             FROM bookings as b LEFT JOIN (attractions as a, users as u) ON a.id=b.attractionId and u.id=b.userId WHERE ordernum=%s"""
         value=(order_num,)
-        results=connection_db(sql,value)
+        results=connection_db_search(sql,value)
         result_lst=[]
         if results:
             for result in results:
@@ -245,7 +272,7 @@ def search_order_history(user_id):
             FROM bookings as b  JOIN attractions as a ON a.id=b.attractionId  WHERE userId=%s and ordernum IS NOT NULL;
         """
     value=(user_id,)
-    results=connection_db(sql,value)
+    results=connection_db_search(sql,value)
     if results:
         result_list=[]
         for result in results:
@@ -271,12 +298,12 @@ def updated_name_pwd(user_id=None,new_name=None,pwd=None):
         if new_name:
                 sql="UPDATE  users SET name = %s WHERE id = %s"
                 value=(new_name,user_id)
-                result=connection_db(sql,value)
+                result=connection_db_commit(sql,value)
               
         elif pwd:
                 sql="UPDATE  users SET password = %s WHERE id = %s"
                 value=(pwd,user_id)
-                result=connection_db(sql,value)
+                result=connection_db_commit(sql,value)
         return True
         
     except: 

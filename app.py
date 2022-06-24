@@ -8,6 +8,7 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 app = Flask(__name__)
+
 # register blueprint
 app.register_blueprint(api, url_prefix='/api')
 app.register_blueprint(api_user, url_prefix='/api')
@@ -47,6 +48,8 @@ def thankyou():
 @app.route("/member")
 def member():
     return render_template("member.html")
+
+
 
 
 if __name__ == '__main__':

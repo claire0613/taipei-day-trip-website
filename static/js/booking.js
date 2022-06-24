@@ -22,6 +22,11 @@ class TotalPrice{
     set addPrice(value){
         this._totalprice+=value
     }
+    
+    reset(){
+        this._totalprice=0
+    }
+
 }
 let totalPrice = new TotalPrice;
 async function getUserData(){
@@ -45,6 +50,7 @@ getUserData()
 // 獲取行程資料
 async function getBookingData(){
     bookingBox.innerHTML = ''
+    totalPrice.reset()
     await fetch(bookingapi)
     .then(res => res.json())
     .then(result=>(result.data))
