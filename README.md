@@ -1,4 +1,4 @@
-# Taipei-Day-Trip-Website (台北一日遊 旅遊店商專案)
+# Taipei-Day-Trip-Website (旅遊電商網站)
 
 台北一日遊專案是一個使用者能夠查詢台北的景點並且預定行程的旅遊電商網站。
 
