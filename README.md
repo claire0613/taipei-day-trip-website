@@ -16,9 +16,10 @@ This website is a tourism e-commerce website where users can search the attracti
 ##  Technique
 - Develop with **Python** using **Flask** framework.
 - Deploy to **AWS EC2**.
-- Using **Index** to facilitate query efficiencies in **MySQL**.
+- Use **Index** to facilitate query efficiencies in **MySQL**.
+- Payment system by TapPay.
 - Apply for **SSL** in Let's Encrypt.
-- Using **JSON Web Token** to authenticate users.
+- Use **JSON Web Token** to authenticate users.
 - Make **RWD layout** and **Infinite Scroll** with pure JavaScript.
 
 
